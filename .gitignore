@@ -52,3 +52,8 @@ models/
 # submission deliverables, so they are NOT ignored.
 outputs/extracted_text/
 *.log
+
+
+# Prompts
+
+prompt.md
