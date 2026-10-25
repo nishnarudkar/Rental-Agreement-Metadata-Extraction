@@ -2,15 +2,19 @@
 
 ## What it does
 
-`read_docx(path)` returns an `ExtractedText`:
+`read_docx(path)` returns an `ExtractedText`. `read_document(path)` returns the
+same type for both DOCX and PNG and also fills in the processing time:
 
 | Field | Meaning |
 |---|---|
+| `document_id` | ID used in the CSV `File Name` column (`.pdf.docx` → both extensions dropped) |
 | `filename` | Source file name, e.g. `47854715-RENTAL-AGREEMENT.docx` |
-| `document_type` | `"docx"` (or `"png"` for OCR results) |
+| `document_type` | `"docx"` or `"png"` |
 | `text` | Plain text, one line per paragraph or table row |
 | `warnings` | Things the reader saw but could not turn into text |
+| `seconds` | Processing time (set by `read_document`) |
 | `mean_confidence` | OCR only; `None` for DOCX |
+| `diagnostics` | OCR only: per-line text, confidence and box (see `docs/ocr.md`) |
 
 The document body is walked in XML order, not through python-docx's
 `Document.paragraphs`, so these are all kept in reading order:

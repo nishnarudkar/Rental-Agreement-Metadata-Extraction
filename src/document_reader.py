@@ -12,6 +12,7 @@ dropped. See ``docs/docx_reader.md`` for the limitations.
 This module only converts documents to text; it extracts no metadata.
 """
 
+import time
 import zipfile
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -19,6 +20,8 @@ from pathlib import Path
 import docx
 from docx.oxml.ns import qn
 from lxml import etree
+
+from src.dataset import document_id
 
 MC_FALLBACK = "{http://schemas.openxmlformats.org/markup-compatibility/2006}Fallback"
 VML_IMAGEDATA = "{urn:schemas-microsoft-com:vml}imagedata"
@@ -39,10 +42,12 @@ class DocumentReadError(ValueError):
 
 @dataclass
 class ExtractedText:
+    document_id: str  # matches the CSV "File Name" column
     filename: str
     document_type: str  # "docx" or "png"
     text: str
     warnings: list[str] = field(default_factory=list)
+    seconds: float = 0.0  # wall-clock processing time
     mean_confidence: float | None = None  # OCR only
     diagnostics: dict | None = None  # OCR only: per-line text, confidence, boxes
 
@@ -169,6 +174,7 @@ def read_docx(path: Path) -> ExtractedText:
     document = _open_docx(path)
     text = "\n".join(_block_lines(document.element.body))
     return ExtractedText(
+        document_id=document_id(path),
         filename=path.name,
         document_type="docx",
         text=text,
@@ -176,21 +182,34 @@ def read_docx(path: Path) -> ExtractedText:
     )
 
 
-def read_document(path: Path) -> ExtractedText:
-    """Dispatch on file type. OCR is imported lazily because it is slow to load."""
-    suffix = path.suffix.lower()
-    if suffix == ".docx":
-        return read_docx(path)
-    if suffix == ".png":
-        from src.ocr import ocr_image
+def _read_png(path: Path) -> ExtractedText:
+    from src.ocr import ocr_image  # imported lazily: PaddleOCR is slow to load
 
-        ocr = ocr_image(path)
-        return ExtractedText(
-            filename=path.name,
-            document_type="png",
-            text=ocr.text,
-            warnings=ocr.warnings,
-            mean_confidence=ocr.mean_confidence,
-            diagnostics=ocr.diagnostics(),
-        )
-    raise DocumentReadError(path, f"unsupported file type '{suffix}' (expected .docx or .png)")
+    ocr = ocr_image(path)
+    return ExtractedText(
+        document_id=document_id(path),
+        filename=path.name,
+        document_type="png",
+        text=ocr.text,
+        warnings=ocr.warnings,
+        mean_confidence=ocr.mean_confidence,
+        diagnostics=ocr.diagnostics(),
+    )
+
+
+READERS = {".docx": read_docx, ".png": _read_png}
+
+
+def read_document(path: Path) -> ExtractedText:
+    """Read any supported document into a uniform ``ExtractedText``.
+
+    Raises ``DocumentReadError`` (with a plain reason) for unsupported types and
+    unreadable files. The source file is only ever opened for reading.
+    """
+    reader = READERS.get(path.suffix.lower())
+    if reader is None:
+        raise DocumentReadError(path, f"unsupported file type '{path.suffix}' (expected .docx or .png)")
+    start = time.perf_counter()
+    result = reader(path)
+    result.seconds = round(time.perf_counter() - start, 2)
+    return result
