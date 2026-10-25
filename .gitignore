@@ -28,12 +28,27 @@ venv.bak/
 Thumbs.db
 desktop.ini
 
-# OCR / Model cache
+# Test / tooling caches
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Secrets / local config
+.env
+
+# OCR / Model cache and weights (never commit models)
 .paddleocr/
+.paddlex/
 cache/
+models/
+*.gguf
+*.safetensors
+*.bin
+*.pt
+*.onnx
 
 # Outputs / Logs
+# Intermediate text is regenerable; predictions.csv and evaluation.json are
+# submission deliverables, so they are NOT ignored.
 outputs/extracted_text/
-outputs/predictions.csv
-outputs/evaluation.json
 *.log
