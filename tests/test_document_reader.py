@@ -1,11 +1,14 @@
+import io
+import zipfile
 from pathlib import Path
 
 import docx
 import pytest
 from docx.oxml import parse_xml
+from PIL import Image
 
 from src.config import TRAIN_DIR
-from src.document_reader import read_docx, read_document
+from src.document_reader import DocumentReadError, read_docx, read_document
 from src.ocr import _group_lines
 
 NS = (
@@ -57,8 +60,95 @@ def test_real_docx_includes_text_box_content():
 
 
 def test_unsupported_extension_raises(tmp_path):
-    with pytest.raises(ValueError):
+    with pytest.raises(DocumentReadError, match="unsupported file type '.pdf'"):
         read_document(tmp_path / "agreement.pdf")
+
+
+# --- structured result and warnings ------------------------------------------
+
+
+def test_result_has_filename_type_text_and_warnings(sample_docx):
+    result = read_docx(sample_docx)
+    assert result.filename == "sample.docx"
+    assert result.document_type == "docx"
+    assert result.mean_confidence is None
+    assert "1 text box(es) read; their position in the reading order is approximate" in result.warnings
+
+
+def _save(document, tmp_path, name="doc.docx") -> Path:
+    path = tmp_path / name
+    document.save(path)
+    return path
+
+
+def test_empty_document_warns(tmp_path):
+    result = read_docx(_save(docx.Document(), tmp_path))
+    assert result.text == ""
+    assert result.warnings == ["no text found in the document body"]
+
+
+def test_empty_paragraphs_are_skipped(tmp_path):
+    document = docx.Document()
+    for text in ["", "   ", "Real line", ""]:
+        document.add_paragraph(text)
+    assert read_docx(_save(document, tmp_path)).text == "Real line"
+
+
+def test_short_text_warns(tmp_path):
+    document = docx.Document()
+    document.add_paragraph("Signature page")
+    (warning,) = read_docx(_save(document, tmp_path)).warnings
+    assert warning.startswith("very little text found")
+
+
+def test_embedded_image_warns(tmp_path):
+    png = io.BytesIO()
+    Image.new("RGB", (20, 20), "white").save(png, format="PNG")
+    png.seek(0)
+    document = docx.Document()
+    document.add_paragraph("A rental agreement. " * 10)
+    document.add_picture(png)
+    assert "1 embedded image(s): any text inside them is not extracted" in read_docx(_save(document, tmp_path)).warnings
+
+
+def test_header_text_is_excluded_but_reported(tmp_path):
+    document = docx.Document()
+    document.sections[0].header.paragraphs[0].text = "Page header"
+    document.add_paragraph("Body text of the agreement. " * 5)
+    result = read_docx(_save(document, tmp_path))
+    assert "Page header" not in result.text
+    assert any(w.startswith("header/footer text not included: header") for w in result.warnings)
+
+
+# --- malformed files -----------------------------------------------------------
+
+
+def test_missing_file(tmp_path):
+    with pytest.raises(DocumentReadError, match="file not found"):
+        read_docx(tmp_path / "nope.docx")
+
+
+def test_zero_byte_file(tmp_path):
+    path = tmp_path / "empty.docx"
+    path.write_bytes(b"")
+    with pytest.raises(DocumentReadError, match="empty"):
+        read_docx(path)
+
+
+def test_not_a_zip_file(tmp_path):
+    path = tmp_path / "legacy.docx"
+    path.write_bytes(b"\xd0\xcf\x11\xe0 legacy Word 97 header bytes")
+    with pytest.raises(DocumentReadError, match="not a DOCX"):
+        read_docx(path)
+
+
+def test_zip_without_word_content(tmp_path):
+    path = tmp_path / "broken.docx"
+    with zipfile.ZipFile(path, "w") as z:
+        z.writestr("hello.txt", "not a word document")
+    with pytest.raises(DocumentReadError, match="malformed DOCX package") as info:
+        read_docx(path)
+    assert info.value.path == path
 
 
 def test_ocr_fragments_on_one_line_are_joined_left_to_right():
