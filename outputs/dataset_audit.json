@@ -1,0 +1,501 @@
+{
+  "policy": "Test labels are summarised by counts only; their values are not read here.",
+  "train": {
+    "overview": {
+      "file": "train.csv",
+      "rows": 10,
+      "columns": [
+        "File Name",
+        "Aggrement Value",
+        "Aggrement Start Date",
+        "Aggrement End Date",
+        "Renewal Notice (Days)",
+        "Party One",
+        "Party Two"
+      ],
+      "inferred_dtypes": {
+        "File Name": "object",
+        "Aggrement Value": "int64",
+        "Aggrement Start Date": "object",
+        "Aggrement End Date": "object",
+        "Renewal Notice (Days)": "float64",
+        "Party One": "object",
+        "Party Two": "object"
+      }
+    },
+    "files": {
+      "matched": [
+        "18325926-Rental-Agreement-1",
+        "36199312-Rental-Agreement",
+        "44737744-Maddireddy-Bhargava-Reddy-Rental-Agreement",
+        "47854715-RENTAL-AGREEMENT",
+        "50070534-RENTAL-AGREEMENT",
+        "54770958-Rental-Agreement",
+        "54945838-Rental-Agreement",
+        "6683127-House-Rental-Contract-GERALDINE-GALINATO-v2-Page-1",
+        "6683129-House-Rental-Contract-Geraldine-Galinato-v2"
+      ],
+      "label_without_file": [
+        "24158401-Rental-Agreement"
+      ],
+      "file_without_label": [
+        "46239065-Standard-Rental-Agreement-Rental-With-Performance-Fee"
+      ],
+      "duplicate_ids_in_csv": [],
+      "file_formats": {
+        ".docx": 7,
+        ".png": 3
+      }
+    },
+    "label_issues": [
+      {
+        "document": "18325926-Rental-Agreement-1",
+        "column": "Aggrement End Date",
+        "issue": "impossible calendar date",
+        "value": "31.11.2009"
+      },
+      {
+        "document": "18325926-Rental-Agreement-1",
+        "column": "Party One",
+        "issue": "leading/trailing whitespace",
+        "value": "MR.K.Kuttan "
+      },
+      {
+        "document": "18325926-Rental-Agreement-1",
+        "column": "Party Two",
+        "issue": "leading/trailing whitespace",
+        "value": "P.M. Narayana Namboodri "
+      },
+      {
+        "document": "36199312-Rental-Agreement",
+        "column": "Aggrement End Date",
+        "issue": "impossible calendar date",
+        "value": "31.04.2011"
+      },
+      {
+        "document": "36199312-Rental-Agreement",
+        "column": "Party One",
+        "issue": "leading/trailing whitespace",
+        "value": "Balaji.R "
+      },
+      {
+        "document": "44737744-Maddireddy-Bhargava-Reddy-Rental-Agreement",
+        "column": "Renewal Notice (Days)",
+        "issue": "missing",
+        "value": ""
+      },
+      {
+        "document": "47854715-RENTAL-AGREEMENT",
+        "column": "Aggrement End Date",
+        "issue": "impossible calendar date",
+        "value": "31.02.2011"
+      },
+      {
+        "document": "47854715-RENTAL-AGREEMENT",
+        "column": "Party One",
+        "issue": "leading/trailing whitespace",
+        "value": " P C MATHEW"
+      },
+      {
+        "document": "47854715-RENTAL-AGREEMENT",
+        "column": "Party Two",
+        "issue": "leading/trailing whitespace",
+        "value": " L GOPINATH "
+      },
+      {
+        "document": "50070534-RENTAL-AGREEMENT",
+        "column": "Aggrement Start Date",
+        "issue": "leading/trailing whitespace",
+        "value": "01.04.2010 "
+      },
+      {
+        "document": "50070534-RENTAL-AGREEMENT",
+        "column": "Party One",
+        "issue": "leading/trailing whitespace",
+        "value": " P. JohnsonRavikumar"
+      },
+      {
+        "document": "50070534-RENTAL-AGREEMENT",
+        "column": "Party Two",
+        "issue": "leading/trailing whitespace",
+        "value": "Saravanan BV "
+      }
+    ],
+    "leaked_row_issue_counts": {
+      "Party One": {
+        "leading/trailing whitespace": 1
+      },
+      "Party Two": {
+        "leading/trailing whitespace": 1
+      }
+    },
+    "identical_label_rows": [
+      [
+        "6683127-House-Rental-Contract-GERALDINE-GALINATO-v2-Page-1",
+        "6683129-House-Rental-Contract-Geraldine-Galinato-v2"
+      ]
+    ],
+    "near_duplicate_documents": [
+      {
+        "a": "6683127-House-Rental-Contract-GERALDINE-GALINATO-v2-Page-1",
+        "b": "6683129-House-Rental-Contract-Geraldine-Galinato-v2",
+        "similarity": 0.959
+      }
+    ],
+    "label_support": [
+      {
+        "document": "6683127-House-Rental-Contract-GERALDINE-GALINATO-v2-Page-1",
+        "Party One": {
+          "own_score": 1.0,
+          "best_document": "6683127-House-Rental-Contract-GERALDINE-GALINATO-v2-Page-1",
+          "best_score": 1.0
+        },
+        "Party Two": {
+          "own_score": 1.0,
+          "best_document": "6683127-House-Rental-Contract-GERALDINE-GALINATO-v2-Page-1",
+          "best_score": 1.0
+        },
+        "Aggrement Value": {
+          "found_in_own_text": false,
+          "found_in": [
+            "6683129-House-Rental-Contract-Geraldine-Galinato-v2"
+          ]
+        },
+        "fits_other_document_better": false
+      },
+      {
+        "document": "6683129-House-Rental-Contract-Geraldine-Galinato-v2",
+        "Party One": {
+          "own_score": 1.0,
+          "best_document": "6683127-House-Rental-Contract-GERALDINE-GALINATO-v2-Page-1",
+          "best_score": 1.0
+        },
+        "Party Two": {
+          "own_score": 1.0,
+          "best_document": "6683127-House-Rental-Contract-GERALDINE-GALINATO-v2-Page-1",
+          "best_score": 1.0
+        },
+        "Aggrement Value": {
+          "found_in_own_text": true,
+          "found_in": [
+            "6683129-House-Rental-Contract-Geraldine-Galinato-v2"
+          ]
+        },
+        "fits_other_document_better": false
+      },
+      {
+        "document": "18325926-Rental-Agreement-1",
+        "Party One": {
+          "own_score": 1.0,
+          "best_document": "18325926-Rental-Agreement-1",
+          "best_score": 1.0
+        },
+        "Party Two": {
+          "own_score": 1.0,
+          "best_document": "18325926-Rental-Agreement-1",
+          "best_score": 1.0
+        },
+        "Aggrement Value": {
+          "found_in_own_text": true,
+          "found_in": [
+            "18325926-Rental-Agreement-1"
+          ]
+        },
+        "fits_other_document_better": false
+      },
+      {
+        "document": "36199312-Rental-Agreement",
+        "Party One": {
+          "own_score": 1.0,
+          "best_document": "36199312-Rental-Agreement",
+          "best_score": 1.0
+        },
+        "Party Two": {
+          "own_score": 1.0,
+          "best_document": "36199312-Rental-Agreement",
+          "best_score": 1.0
+        },
+        "Aggrement Value": {
+          "found_in_own_text": true,
+          "found_in": [
+            "36199312-Rental-Agreement"
+          ]
+        },
+        "fits_other_document_better": false
+      },
+      {
+        "document": "44737744-Maddireddy-Bhargava-Reddy-Rental-Agreement",
+        "Party One": {
+          "own_score": 0.5,
+          "best_document": "44737744-Maddireddy-Bhargava-Reddy-Rental-Agreement",
+          "best_score": 0.5
+        },
+        "Party Two": {
+          "own_score": 1.0,
+          "best_document": "44737744-Maddireddy-Bhargava-Reddy-Rental-Agreement",
+          "best_score": 1.0
+        },
+        "Aggrement Value": {
+          "found_in_own_text": false,
+          "found_in": []
+        },
+        "fits_other_document_better": false
+      },
+      {
+        "document": "47854715-RENTAL-AGREEMENT",
+        "Party One": {
+          "own_score": 1.0,
+          "best_document": "47854715-RENTAL-AGREEMENT",
+          "best_score": 1.0
+        },
+        "Party Two": {
+          "own_score": 1.0,
+          "best_document": "47854715-RENTAL-AGREEMENT",
+          "best_score": 1.0
+        },
+        "Aggrement Value": {
+          "found_in_own_text": true,
+          "found_in": [
+            "47854715-RENTAL-AGREEMENT"
+          ]
+        },
+        "fits_other_document_better": false
+      },
+      {
+        "document": "50070534-RENTAL-AGREEMENT",
+        "Party One": {
+          "own_score": 1.0,
+          "best_document": "50070534-RENTAL-AGREEMENT",
+          "best_score": 1.0
+        },
+        "Party Two": {
+          "own_score": 1.0,
+          "best_document": "50070534-RENTAL-AGREEMENT",
+          "best_score": 1.0
+        },
+        "Aggrement Value": {
+          "found_in_own_text": true,
+          "found_in": [
+            "50070534-RENTAL-AGREEMENT"
+          ]
+        },
+        "fits_other_document_better": false
+      },
+      {
+        "document": "54770958-Rental-Agreement",
+        "Party One": {
+          "own_score": 0.0,
+          "best_document": "54945838-Rental-Agreement",
+          "best_score": 1.0
+        },
+        "Party Two": {
+          "own_score": 0.0,
+          "best_document": "54945838-Rental-Agreement",
+          "best_score": 1.0
+        },
+        "Aggrement Value": {
+          "found_in_own_text": false,
+          "found_in": [
+            "54945838-Rental-Agreement"
+          ]
+        },
+        "fits_other_document_better": true
+      },
+      {
+        "document": "54945838-Rental-Agreement",
+        "Party One": {
+          "own_score": 0.0,
+          "best_document": "54770958-Rental-Agreement",
+          "best_score": 1.0
+        },
+        "Party Two": {
+          "own_score": 0.0,
+          "best_document": "54770958-Rental-Agreement",
+          "best_score": 0.75
+        },
+        "Aggrement Value": {
+          "found_in_own_text": false,
+          "found_in": [
+            "54770958-Rental-Agreement"
+          ]
+        },
+        "fits_other_document_better": true
+      }
+    ],
+    "agreement_value_contexts": [
+      {
+        "document": "6683127-House-Rental-Contract-GERALDINE-GALINATO-v2-Page-1",
+        "value": "6500",
+        "snippets": []
+      },
+      {
+        "document": "6683129-House-Rental-Contract-Geraldine-Galinato-v2",
+        "value": "6500",
+        "snippets": [
+          "no due date security deposit in cash 1 5 20 2007 php 6500 00 monthly rental advance payment in cash from to cash 2 5",
+          "cash 2 5 20 2007 5 20 2007 6 20 2007 php 6500 00 payment in pdcs from to pdcs 3 6 20 2007 6",
+          "pdcs 3 6 20 2007 6 20 2007 7 20 2007 php 6500 00 4 7 20 2007 7 20 2007 8 20 2007 6500",
+          "6500 00 4 7 20 2007 7 20 2007 8 20 2007 6500 00 5 8 20 2007 8 20 2007 9 20 2007 6500",
+          "6500 00 5 8 20 2007 8 20 2007 9 20 2007 6500 00 6 9 20 2007 9 20 2007 10 20 2007 6500",
+          "6500 00 6 9 20 2007 9 20 2007 10 20 2007 6500 00 7 10 20 2007 10 20 2007 11 20 2007 6500",
+          "6500 00 7 10 20 2007 10 20 2007 11 20 2007 6500 00 8 11 20 2007 11 20 2007 12 20 2007 6500",
+          "6500 00 8 11 20 2007 11 20 2007 12 20 2007 6500 00 9 12 20 2007 12 20 2007 1 20 2008 6500",
+          "6500 00 9 12 20 2007 12 20 2007 1 20 2008 6500 00 10 1 20 2008 1 20 2007 2 20 2008 6500",
+          "6500 00 10 1 20 2008 1 20 2007 2 20 2008 6500 00 11 2 20 2008 2 20 2008 3 20 2008 6500",
+          "6500 00 11 2 20 2008 2 20 2008 3 20 2008 6500 00 12 3 20 2008 3 20 2008 4 20 2008 6500",
+          "6500 00 12 3 20 2008 3 20 2008 4 20 2008 6500 00 13 4 20 2008 4 20 2008 5 20 2008 6500",
+          "6500 00 13 4 20 2008 4 20 2008 5 20 2008 6500 00 subletting without first requesting permission from the owner s resident s",
+          "pdcs 1 6 20 2007 6 20 2007 7 20 2007 php 6500 00 2 7 20 2007 7 20 2007 8 20 2007 6500",
+          "6500 00 2 7 20 2007 7 20 2007 8 20 2007 6500 00 3 8 20 2007 8 20 2007 9 20 2007 6500",
+          "6500 00 3 8 20 2007 8 20 2007 9 20 2007 6500 00 4 9 20 2007 9 20 2007 10 20 2007 6500",
+          "6500 00 4 9 20 2007 9 20 2007 10 20 2007 6500 00 5 10 20 2007 10 20 2007 11 20 2007 6500",
+          "6500 00 5 10 20 2007 10 20 2007 11 20 2007 6500 00 6 11 20 2007 11 20 2007 12 20 2007 6500",
+          "6500 00 6 11 20 2007 11 20 2007 12 20 2007 6500 00 7 12 20 2007 12 20 2007 1 20 2008 6500",
+          "6500 00 7 12 20 2007 12 20 2007 1 20 2008 6500 00 8 1 20 2008 1 20 2007 2 20 2008 6500",
+          "6500 00 8 1 20 2008 1 20 2007 2 20 2008 6500 00 9 2 20 2008 2 20 2008 3 20 2008 6500",
+          "6500 00 9 2 20 2008 2 20 2008 3 20 2008 6500 00 10 3 20 2008 3 20 2008 4 20 2008 6500",
+          "6500 00 10 3 20 2008 3 20 2008 4 20 2008 6500 00 11 4 20 2008 4 20 2008 5 20 2008 6500",
+          "6500 00 11 4 20 2008 4 20 2008 5 20 2008 6500 00 failure to fufill this promised as stated above will result to"
+        ]
+      },
+      {
+        "document": "18325926-Rental-Agreement-1",
+        "value": "4000",
+        "snippets": [
+          "proprietor of the business and he has agreed to pay rent rs 4000 00 rupees four thousand only for above said premises with the following"
+        ]
+      },
+      {
+        "document": "36199312-Rental-Agreement",
+        "value": "3800",
+        "snippets": [
+          "payable by the lessees to the lessor is a sum of rs 3800 rupees thirty eight thousand only on or before 10th of every english"
+        ]
+      },
+      {
+        "document": "44737744-Maddireddy-Bhargava-Reddy-Rental-Agreement",
+        "value": "3000",
+        "snippets": []
+      },
+      {
+        "document": "47854715-RENTAL-AGREEMENT",
+        "value": "9000",
+        "snippets": [
+          "the second part for residential use on a monthly rent of rs 9000 rupees nine thousand only plus monthly maintenance expenses levied on by the",
+          "lease the house to the lessee on a monthly rent of rs 9000 rupees seven thousand only for a period of 11 months starting from"
+        ]
+      },
+      {
+        "document": "50070534-RENTAL-AGREEMENT",
+        "value": "10000",
+        "snippets": [
+          "the monthly rent water maintenance charges for the said shall be rs 10000 rupees ten thousand only rent should be paid according to the english"
+        ]
+      },
+      {
+        "document": "54770958-Rental-Agreement",
+        "value": "8000",
+        "snippets": []
+      },
+      {
+        "document": "54945838-Rental-Agreement",
+        "value": "5500",
+        "snippets": []
+      }
+    ]
+  },
+  "test": {
+    "overview": {
+      "file": "test.csv",
+      "rows": 4,
+      "columns": [
+        "File Name",
+        "Aggrement Value",
+        "Aggrement Start Date",
+        "Aggrement End Date",
+        "Renewal Notice (Days)",
+        "Party One",
+        "Party Two"
+      ],
+      "inferred_dtypes": {
+        "File Name": "object",
+        "Aggrement Value": "int64",
+        "Aggrement Start Date": "object",
+        "Aggrement End Date": "object",
+        "Renewal Notice (Days)": "int64",
+        "Party One": "object",
+        "Party Two": "object"
+      }
+    },
+    "files": {
+      "matched": [
+        "156155545-Rental-Agreement-Kns-Home",
+        "228094620-Rental-Agreement",
+        "24158401-Rental-Agreement",
+        "95980236-Rental-Agreement"
+      ],
+      "label_without_file": [],
+      "file_without_label": [],
+      "duplicate_ids_in_csv": [],
+      "file_formats": {
+        ".docx": 2,
+        ".png": 2
+      }
+    },
+    "label_issue_counts": {
+      "Party One": {
+        "leading/trailing whitespace": 4
+      },
+      "Party Two": {
+        "leading/trailing whitespace": 3,
+        "starts with punctuation": 1
+      }
+    }
+  },
+  "cross_split": {
+    "train_label_rows_for_test_documents": [
+      "24158401-Rental-Agreement"
+    ],
+    "near_duplicate_documents": []
+  },
+  "development_set": {
+    "usable": [
+      "18325926-Rental-Agreement-1",
+      "36199312-Rental-Agreement",
+      "44737744-Maddireddy-Bhargava-Reddy-Rental-Agreement",
+      "47854715-RENTAL-AGREEMENT",
+      "50070534-RENTAL-AGREEMENT",
+      "54770958-Rental-Agreement",
+      "54945838-Rental-Agreement",
+      "6683127-House-Rental-Contract-GERALDINE-GALINATO-v2-Page-1",
+      "6683129-House-Rental-Contract-Geraldine-Galinato-v2"
+    ],
+    "excluded": {
+      "24158401-Rental-Agreement": "document belongs to the test split"
+    },
+    "labels_fit_other_document": [
+      "54770958-Rental-Agreement",
+      "54945838-Rental-Agreement"
+    ]
+  },
+  "reviewed_conclusions": {
+    "agreement_value": "monthly rent in digits; digits win when digits and words disagree",
+    "start_date": "tenancy commencement date when stated, otherwise execution date; DD.MM.YYYY",
+    "end_date": "stated end date, otherwise start + term; some reference end dates are impossible calendar dates",
+    "renewal_notice_days": "termination/vacating notice period in days (1 month = 30); blank when absent",
+    "party_one": "lessor / owner",
+    "party_two": "lessee / tenant",
+    "swapped_label_rows": [
+      "54770958-Rental-Agreement",
+      "54945838-Rental-Agreement"
+    ],
+    "labels_not_supported_by_own_text": {
+      "6683127-House-Rental-Contract-GERALDINE-GALINATO-v2-Page-1": [
+        "Renewal Notice (Days)"
+      ],
+      "44737744-Maddireddy-Bhargava-Reddy-Rental-Agreement": [
+        "Aggrement Value"
+      ]
+    }
+  }
+}
