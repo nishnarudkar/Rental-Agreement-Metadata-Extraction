@@ -35,14 +35,17 @@ def extract_split(split: str, force: bool = False) -> dict:
         seconds = round(time.perf_counter() - start, 1)
         txt_path.write_text(result.text, encoding="utf-8")
         manifest[doc_id] = {
-            "source": path.name,
-            "method": result.method,
+            "source": result.filename,
+            "document_type": result.document_type,
             "chars": len(result.text),
             "lines": result.text.count("\n") + 1,
             "mean_ocr_confidence": result.mean_confidence,
+            "warnings": result.warnings,
             "seconds": seconds,
         }
-        print(f"[{result.method}] {split}/{doc_id}: {len(result.text)} chars in {seconds}s")
+        print(f"[{result.document_type}] {split}/{doc_id}: {len(result.text)} chars in {seconds}s")
+        for warning in result.warnings:
+            print(f"    warning: {warning}")
         manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     return manifest
 

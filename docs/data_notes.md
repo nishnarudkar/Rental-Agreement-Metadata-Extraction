@@ -44,7 +44,7 @@ Usable development set: 9 train documents (8 distinct contracts).
 ## Documents
 
 - Test DOCX files have a double extension (`.pdf.docx`); `src.dataset.document_id` strips both.
-- DOCX files were converted from PDFs; 7 of 12 contain **text boxes**, which
+- DOCX files were converted from PDFs; 6 of 12 contain **text boxes**, which
   python-docx's `Document.paragraphs` skips. `src.document_reader` reads them.
 - Some DOCX text is itself noisy OCR (e.g. `rEST"° LANDLORD` in `44737744`).
 - PNG scans are single tall pages (up to 2550x6600) with large blank areas.
