@@ -4,12 +4,15 @@
     python -m src.extract_text --split all --force
 
 Writes ``outputs/extracted_text/<split>/<document id>.txt`` plus a
-``manifest.json`` per split (method, length, OCR confidence, timing). Cached
-files are reused unless ``--force`` is given, because OCR is slow on CPU.
+``manifest.json`` per split (type, length, OCR confidence, warnings, timing).
+OCR'd images also get ``<document id>.ocr.json`` with every recognised line,
+its confidence and bounding box. A run log goes to ``extraction.log``.
+Cached files are reused unless ``--force`` is given, because OCR is slow on CPU.
 """
 
 import argparse
 import json
+import logging
 import time
 
 from src.config import EXTRACTED_TEXT_DIR, TEST_DIR, TRAIN_DIR
@@ -34,6 +37,8 @@ def extract_split(split: str, force: bool = False) -> dict:
         result = read_document(path)
         seconds = round(time.perf_counter() - start, 1)
         txt_path.write_text(result.text, encoding="utf-8")
+        if result.diagnostics is not None:
+            (out_dir / f"{doc_id}.ocr.json").write_text(json.dumps(result.diagnostics, indent=2), encoding="utf-8")
         manifest[doc_id] = {
             "source": result.filename,
             "document_type": result.document_type,
@@ -55,6 +60,12 @@ def main() -> None:
     parser.add_argument("--split", choices=["train", "test", "all"], default="all")
     parser.add_argument("--force", action="store_true", help="re-extract even if cached")
     args = parser.parse_args()
+    EXTRACTED_TEXT_DIR.mkdir(parents=True, exist_ok=True)
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+        handlers=[logging.FileHandler(EXTRACTED_TEXT_DIR / "extraction.log", encoding="utf-8")],
+    )
     for split in ["train", "test"] if args.split == "all" else [args.split]:
         extract_split(split, force=args.force)
 

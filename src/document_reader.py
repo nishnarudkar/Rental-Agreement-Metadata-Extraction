@@ -44,6 +44,7 @@ class ExtractedText:
     text: str
     warnings: list[str] = field(default_factory=list)
     mean_confidence: float | None = None  # OCR only
+    diagnostics: dict | None = None  # OCR only: per-line text, confidence, boxes
 
 
 def _in_fallback(el) -> bool:
@@ -183,6 +184,13 @@ def read_document(path: Path) -> ExtractedText:
     if suffix == ".png":
         from src.ocr import ocr_image
 
-        text, confidence = ocr_image(path)
-        return ExtractedText(filename=path.name, document_type="png", text=text, mean_confidence=confidence)
+        ocr = ocr_image(path)
+        return ExtractedText(
+            filename=path.name,
+            document_type="png",
+            text=ocr.text,
+            warnings=ocr.warnings,
+            mean_confidence=ocr.mean_confidence,
+            diagnostics=ocr.diagnostics(),
+        )
     raise DocumentReadError(path, f"unsupported file type '{suffix}' (expected .docx or .png)")
