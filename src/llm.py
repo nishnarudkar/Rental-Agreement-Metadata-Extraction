@@ -31,6 +31,14 @@ class LLMError(RuntimeError):
     """The local model could not produce a usable answer."""
 
 
+class LLMOutputError(LLMError):
+    """The answer was malformed or cut off; asking again may succeed."""
+
+
+class LLMInputTooLongError(LLMError):
+    """The prompt does not fit the context window; retrying cannot help."""
+
+
 @dataclass
 class LLMConfig:
     model: str = field(default_factory=lambda: os.getenv("LLM_MODEL", DEFAULT_MODEL))
@@ -98,18 +106,21 @@ class LocalLLM:
         prompt_tokens = response.prompt_eval_count or 0
         output_tokens = response.eval_count or 0
         if prompt_tokens + self.config.num_predict > self.config.num_ctx:
-            raise LLMError(
+            raise LLMInputTooLongError(
                 f"Prompt uses {prompt_tokens} tokens; with {self.config.num_predict} reserved for the answer "
                 f"it does not fit num_ctx={self.config.num_ctx}, so the input may have been truncated."
             )
         if response.done_reason == "length":
-            raise LLMError(f"Answer was cut off at num_predict={self.config.num_predict} tokens.")
+            raise LLMOutputError(f"Answer was cut off at num_predict={self.config.num_predict} tokens.")
 
         raw = response.message.content
         try:
             parsed = schema.model_validate_json(raw)
         except ValidationError as exc:
-            raise LLMError(f"Model output does not match {schema.__name__}: {exc.errors()[:3]}") from exc
+            problems = "; ".join(
+                f"{'.'.join(str(p) for p in e['loc']) or 'answer'}: {e['msg']}" for e in exc.errors()[:5]
+            )
+            raise LLMOutputError(f"Model output does not match {schema.__name__}: {problems}") from exc
 
         eval_seconds = (response.eval_duration or 0) / 1e9
         return LLMResult(

@@ -127,6 +127,13 @@ class AgreementExtraction(_Strict):
         "notice clause exists."
     )
 
+    def submission_sources(self) -> dict[str, "Party | Amount | DateValue | NoticePeriod"]:
+        """Which extracted field feeds each submission column (definitions: docs/schema.md)."""
+        start = self.tenancy_start_date if self.tenancy_start_date.value else self.execution_date
+        notice = self.termination_notice if self.termination_notice.value is not None else self.renewal_notice
+        return dict(zip(LABEL_COLUMNS, [self.monthly_rent, start, self.tenancy_end_date, notice,
+                                        self.party_one, self.party_two]))
+
 
 # --------------------------------------------------------------------------- submission record
 
@@ -146,14 +153,14 @@ class AgreementMetadata(BaseModel):
     @classmethod
     def from_extraction(cls, x: AgreementExtraction) -> "AgreementMetadata":
         """Map the detailed extraction to the six fields (definitions: docs/schema.md)."""
-        notice = x.termination_notice if x.termination_notice.value is not None else x.renewal_notice
+        rent, start, end, notice, one, two = x.submission_sources().values()
         return cls(
-            agreement_value=x.monthly_rent.value,
-            agreement_start_date=x.tenancy_start_date.value or x.execution_date.value,
-            agreement_end_date=x.tenancy_end_date.value,
+            agreement_value=rent.value,
+            agreement_start_date=start.value,
+            agreement_end_date=end.value,
             renewal_notice_days=notice.days,
-            party_one=x.party_one.name,
-            party_two=x.party_two.name,
+            party_one=one.name,
+            party_two=two.name,
         )
 
     def to_json(self) -> str:
