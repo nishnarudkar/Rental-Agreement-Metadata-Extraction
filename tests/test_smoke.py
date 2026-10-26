@@ -69,6 +69,29 @@ def test_predict_folder_end_to_end_offline(tmp_path, monkeypatch):
     assert summary["unsupported"] == 1  # notes.txt reported, not silently skipped
 
 
+def test_predict_single_file(tmp_path):
+    folder, out_csv, work = _folder(tmp_path), tmp_path / "one.csv", tmp_path / "work"
+    results = predict_folder(folder / "A-001.docx", out_csv, work, llm=CheckedFakeLLM(_answer()))
+
+    assert list(results) == ["A-001"]  # the PNG next to it is not touched
+    with open(out_csv, encoding="utf-8") as f:
+        rows = list(csv.DictReader(f))
+    assert [r[FILE_NAME_COLUMN] for r in rows] == ["A-001"] and rows[0][VALUE] == "18500"
+    assert not (work / "B-002.txt").exists()
+    assert json.loads((work / "summary.json").read_text(encoding="utf-8"))["files"] == 1
+
+
+@pytest.mark.parametrize("name, message", [("missing.docx", "input not found"),
+                                           ("notes.txt", "unsupported file type '.txt'")])
+def test_cli_rejects_bad_input(tmp_path, name, message):
+    _folder(tmp_path)
+    completed = subprocess.run(
+        [sys.executable, "-m", "src.predict", "--input", str(tmp_path / "agreements" / name),
+         "--output", str(tmp_path / "x.csv")],
+        cwd=PROJECT_ROOT, capture_output=True, text=True, timeout=120)
+    assert completed.returncode == 2 and message in completed.stderr
+
+
 def test_cli_runs_outside_jupyter():
     completed = subprocess.run([sys.executable, "-m", "src.predict", "--help"], cwd=PROJECT_ROOT,
                                capture_output=True, text=True, timeout=120)

@@ -130,6 +130,12 @@ def test_cache_reuses_successes_and_retries_failures(mixed_folder, tmp_path):
     assert (forced["cached"], forced["processed"]) == (0, 4)
 
 
+def test_explicit_file_list_limits_the_run(mixed_folder, tmp_path):
+    summary = extract_folder(mixed_folder, tmp_path / "out", files=[mixed_folder / "good.docx"])
+    assert (summary["files"], summary["succeeded"]) == (1, 1)
+    assert sorted(p.name for p in (tmp_path / "out").glob("*.txt")) == ["good.txt"]
+
+
 def test_source_documents_are_not_modified(mixed_folder, tmp_path):
     def digests():
         return {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in mixed_folder.iterdir()}
