@@ -46,9 +46,17 @@ def check_gpu() -> None:
     print(f"[OK] GPU: {result.stdout.strip()}")
 
 
-def check_ollama() -> None:
-    path = shutil.which("ollama")
-    print(f"[{'OK' if path else 'INFO'}] Ollama CLI: {path or 'not installed (needed in the LLM step)'}")
+def check_ollama() -> bool:
+    from src.llm import LLMError, LocalLLM
+
+    llm = LocalLLM()
+    try:
+        llm.check()
+    except LLMError as exc:
+        print(f"[FAIL] Local LLM: {exc}")
+        return False
+    print(f"[OK] Local LLM: '{llm.config.model}' available at {llm.config.host} (num_ctx={llm.config.num_ctx})")
+    return True
 
 
 def check_data() -> bool:
@@ -80,10 +88,10 @@ def main() -> int:
     pkg_ok = check_packages()
     print("\n== Hardware / runtimes ==")
     check_gpu()
-    check_ollama()
+    llm_ok = check_ollama()
     print("\n== Dataset ==")
     data_ok = check_data()
-    ok = py_ok and pkg_ok and data_ok
+    ok = py_ok and pkg_ok and llm_ok and data_ok
     print(f"\nSetup check {'PASSED' if ok else 'FAILED'}")
     return 0 if ok else 1
 
