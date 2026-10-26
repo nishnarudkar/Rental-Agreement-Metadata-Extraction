@@ -1,0 +1,87 @@
+{
+  "documents_scored": 2,
+  "documents_without_prediction": [],
+  "predictions_without_label": [],
+  "excluded": {
+    "18325926-Rental-Agreement-1": "not selected (--documents)",
+    "24158401-Rental-Agreement": "document file is not in train/",
+    "44737744-Maddireddy-Bhargava-Reddy-Rental-Agreement": "not selected (--documents)",
+    "50070534-RENTAL-AGREEMENT": "not selected (--documents)",
+    "54770958-Rental-Agreement": "not selected (--documents)",
+    "54945838-Rental-Agreement": "not selected (--documents)",
+    "6683127-House-Rental-Contract-GERALDINE-GALINATO-v2-Page-1": "not selected (--documents)",
+    "6683129-House-Rental-Contract-Geraldine-Galinato-v2": "not selected (--documents)"
+  },
+  "fields": {
+    "Aggrement Value": {
+      "denominator": 2,
+      "raw_true": 2,
+      "raw_recall": 1.0,
+      "normalized_true": 2,
+      "normalized_recall": 1.0,
+      "not_extracted": 0,
+      "blank_reference": 0,
+      "unattainable_reference": 0,
+      "definition": "2 documents with a non-blank reference for 'Aggrement Value'; 0 blank reference(s) excluded"
+    },
+    "Aggrement Start Date": {
+      "denominator": 2,
+      "raw_true": 2,
+      "raw_recall": 1.0,
+      "normalized_true": 2,
+      "normalized_recall": 1.0,
+      "not_extracted": 0,
+      "blank_reference": 0,
+      "unattainable_reference": 0,
+      "definition": "2 documents with a non-blank reference for 'Aggrement Start Date'; 0 blank reference(s) excluded"
+    },
+    "Aggrement End Date": {
+      "denominator": 2,
+      "raw_true": 0,
+      "raw_recall": 0.0,
+      "normalized_true": 0,
+      "normalized_recall": 0.0,
+      "not_extracted": 0,
+      "blank_reference": 0,
+      "unattainable_reference": 2,
+      "definition": "2 documents with a non-blank reference for 'Aggrement End Date'; 0 blank reference(s) excluded"
+    },
+    "Renewal Notice (Days)": {
+      "denominator": 2,
+      "raw_true": 2,
+      "raw_recall": 1.0,
+      "normalized_true": 2,
+      "normalized_recall": 1.0,
+      "not_extracted": 0,
+      "blank_reference": 0,
+      "unattainable_reference": 0,
+      "definition": "2 documents with a non-blank reference for 'Renewal Notice (Days)'; 0 blank reference(s) excluded"
+    },
+    "Party One": {
+      "denominator": 2,
+      "raw_true": 0,
+      "raw_recall": 0.0,
+      "normalized_true": 1,
+      "normalized_recall": 0.5,
+      "not_extracted": 0,
+      "blank_reference": 0,
+      "unattainable_reference": 0,
+      "definition": "2 documents with a non-blank reference for 'Party One'; 0 blank reference(s) excluded"
+    },
+    "Party Two": {
+      "denominator": 2,
+      "raw_true": 0,
+      "raw_recall": 0.0,
+      "normalized_true": 1,
+      "normalized_recall": 0.5,
+      "not_extracted": 0,
+      "blank_reference": 0,
+      "unattainable_reference": 0,
+      "definition": "2 documents with a non-blank reference for 'Party Two'; 0 blank reference(s) excluded"
+    }
+  },
+  "macro_raw_recall": 0.5,
+  "macro_normalized_recall": 0.6667,
+  "micro_raw_recall": 0.5,
+  "micro_normalized_recall": 0.6667
+}
