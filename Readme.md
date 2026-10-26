@@ -125,51 +125,84 @@ Evaluated on the 9 usable training documents (excluding `24158401`, which belong
 
 ## System Architecture
 
-```
-                    ┌─────────────────────────┐
-                    │ Raw Input Document      │
-                    │ (.docx or scanned .png) │
-                    └───────────┬─────────────┘
-                                │
-               ┌────────────────┴────────────────┐
-               ▼                                 ▼
-      [ DOCX Ingestion ]                [ PNG Ingestion ]
-   Direct XML Tree Traversal         PaddleOCR Engine (CPU)
-   - Paragraphs, Tables, Headers     - 1600px Vertical Strips
-   - Text boxes (w:txbxContent)      - 200px Dynamic Overlap
-               │                                 │
-               └────────────────┬────────────────┘
-                                │ Extracted Plain Text
-                                ▼
-               ┌─────────────────────────────────┐
-               │  Local LLM Reasoning Engine     │
-               │  (Ollama / Qwen2.5-7B-Instruct) │
-               │  - Temperature: 0.0 (Argmax)    │
-               │  - Context Window: 16,384 tokens│
-               │  - JSON Schema-Constrained      │
-               └────────────────┬────────────────┘
-                                │ Structured JSON Extraction + Verbatim Quotes
-                                ▼
-               ┌─────────────────────────────────┐
-               │  Pydantic Validation & Salvage  │
-               │  - Strict Schema Compliance     │
-               │  - Bounded Self-Correction Loop │
-               │  - Hallucination Quote Check    │
-               └────────────────┬────────────────┘
-                                │ Validated Intermediate Slots
-                                ▼
-               ┌─────────────────────────────────┐
-               │ Code-Assisted Post-Processing   │
-               │ - Calendar Math (Start + Term)  │
-               │ - Unit Normalization (Time->Day)│
-               │ - Primary Date & Notice Choice  │
-               └────────────────┬────────────────┘
-                                │
-               ┌────────────────┴────────────────┐
-               ▼                                 ▼
-      [ Submission Output ]             [ REST API Response ]
-      outputs/predictions.csv           HTTP 200 JSON Payload
-      (6 Target Columns)                (Predictions + Evidence)
+```mermaid
+flowchart TD
+    %% Ingestion Subgraph
+    subgraph INGEST["1. Multimodal Document Ingestion Layer"]
+        DOC["Raw Legal Agreement<br/>(DOCX or Scanned PNG)"]
+        DOCX_PARSER["OpenXML Tree Parser<br/>(Paragraphs, Tables, Textboxes)"]
+        OCR_ENGINE["PaddleOCR Strip-Tiling Engine<br/>(1600px Slices, 200px Overlap)"]
+        DISK_CACHE["Intermediate Text Cache<br/>(outputs/extracted_text/)"]
+        
+        DOC -->|"DOCX file"| DOCX_PARSER
+        DOC -->|"PNG scan"| OCR_ENGINE
+        DOCX_PARSER --> DISK_CACHE
+        OCR_ENGINE --> DISK_CACHE
+    end
+
+    %% Reasoning Subgraph
+    subgraph REASONING["2. Privacy-Preserving LLM Reasoning (100% Local GPU)"]
+        OLLAMA["Local Ollama Daemon<br/>(Qwen2.5-7B-Instruct, Q4_K_M)"]
+        PROMPT_DEF["Instruction Prompt<br/>(Field Definitions & Disambiguation Rules)"]
+        CTX_GUARD["Context Guardrail<br/>(16,384 tokens num_ctx)"]
+        GUIDED_DEC["Schema-Constrained Decoding<br/>(temperature = 0.0, JSON Mode)"]
+        
+        DISK_CACHE -->|"Full Agreement Text"| OLLAMA
+        PROMPT_DEF --> OLLAMA
+        CTX_GUARD -.-> OLLAMA
+        OLLAMA --> GUIDED_DEC
+    end
+
+    %% Validation Subgraph
+    subgraph VALIDATION["3. Validation & Self-Correction Loop"]
+        PYDANTIC["Pydantic v2 Schema Validator<br/>(AgreementExtraction Model)"]
+        QUOTE_CHECK["Verbatim Evidence Grounding<br/>(Checks Quote in Document Text)"]
+        VAL_CHECK{"Valid Schema<br/>& Evidence?"}
+        RETRY_LOOP["Self-Correction Re-Prompt<br/>(Feeds Error Trace to LLM, Max 3x)"]
+        SALVAGE_LAYER["Field-Level Salvage Layer<br/>(Preserves Valid Slots, Nulls Failed)"]
+        
+        GUIDED_DEC --> PYDANTIC
+        PYDANTIC --> QUOTE_CHECK
+        QUOTE_CHECK --> VAL_CHECK
+        VAL_CHECK -->|"Error (Attempts < 3)"| RETRY_LOOP
+        RETRY_LOOP --> OLLAMA
+        VAL_CHECK -->|"Exhausted Retries"| SALVAGE_LAYER
+        VAL_CHECK -->|"Validated Slots"| POST_PROC
+    end
+
+    %% Post-Processing Subgraph
+    subgraph POST_PROC["4. Deterministic Code-Assisted Post-Processing"]
+        direction TB
+        CALENDAR_MATH["Calendar Date Engine<br/>(Start Date + Term Duration = End Date)"]
+        UNIT_NORM["Unit Normalization<br/>(Notice Period: Months/Weeks to Days)"]
+        SLOT_RESOLVE["Target Slot Resolution<br/>(Tenancy Start > Execution Date;<br/>Termination Notice > Renewal Notice)"]
+    end
+
+    SALVAGE_LAYER --> POST_PROC
+
+    %% Output Subgraph
+    subgraph CONSUMERS["5. Deliverables & Production Interfaces"]
+        PRED_CSV["Submission CSV Deliverable<br/>(outputs/predictions.csv - 6 Columns)"]
+        REST_API["FastAPI Production Microservice<br/>(POST /extract - JSON Payload + Evidence)"]
+        EVAL_FRAMEWORK["Metric Evaluation Engine<br/>(Exact-Match & Normalized Recall)"]
+        
+        POST_PROC --> PRED_CSV
+        POST_PROC --> REST_API
+        PRED_CSV --> EVAL_FRAMEWORK
+    end
+
+    %% Flowchart Styling
+    classDef ingestStyle fill:#EBF5FB,stroke:#2980B9,stroke-width:2px,color:#1B4F72;
+    classDef llmStyle fill:#F5EEF8,stroke:#8E44AD,stroke-width:2px,color:#512E5F;
+    classDef valStyle fill:#FEF9E7,stroke:#D35400,stroke-width:2px,color:#7E5109;
+    classDef postStyle fill:#E8F8F5,stroke:#27AE60,stroke-width:2px,color:#145A32;
+    classDef outStyle fill:#FDEDEC,stroke:#C0392B,stroke-width:2px,color:#78281F;
+
+    class DOC,DOCX_PARSER,OCR_ENGINE,DISK_CACHE ingestStyle;
+    class OLLAMA,PROMPT_DEF,CTX_GUARD,GUIDED_DEC llmStyle;
+    class PYDANTIC,QUOTE_CHECK,VAL_CHECK,RETRY_LOOP,SALVAGE_LAYER valStyle;
+    class CALENDAR_MATH,UNIT_NORM,SLOT_RESOLVE postStyle;
+    class PRED_CSV,REST_API,EVAL_FRAMEWORK outStyle;
 ```
 
 ### 1. Data Ingestion Pipeline
