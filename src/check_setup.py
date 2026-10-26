@@ -13,7 +13,7 @@ import sys
 from src.config import LABEL_COLUMNS, TEST_DIR, TRAIN_DIR
 from src.dataset import leaked_ids, list_documents, load_split
 
-REQUIRED_PACKAGES = ["pandas", "docx", "PIL", "pydantic", "ollama", "tqdm", "dotenv", "pytest"]
+REQUIRED_PACKAGES = ["numpy", "pandas", "docx", "PIL", "paddleocr", "pydantic", "ollama", "dotenv", "pytest"]
 
 
 def check_python() -> bool:
