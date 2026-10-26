@@ -1,0 +1,188 @@
+{
+  "split": "test",
+  "frozen_config": {
+    "extractor_config_name": "v3",
+    "extractor_config": {
+      "prompt_version": "v3",
+      "derive_end_date": true,
+      "salvage": true,
+      "verify": false
+    },
+    "max_attempts": 3,
+    "system_prompt_sha256": "22ff42ae543be5bc153bc471ad7dde279c6288815fea4630500b97463abeca2a",
+    "schema_sha256": "0e689147cb30f704300e8142f8ae9d1d2a12d3af2c6462e0b33b6d305a533001",
+    "normalizer_sha256": "cbfcad790779d3b07cd5b8d856969f07e3dd6e595e5aef2470226c2bf26fd405",
+    "model": "qwen2.5:7b",
+    "llm_options": {
+      "temperature": 0.0,
+      "seed": 42,
+      "num_ctx": 16384,
+      "num_predict": 1024
+    },
+    "ocr": {
+      "tile_height": 1600,
+      "tile_overlap": 200,
+      "paragraph_gap": 1.5,
+      "engine_settings_sha256": "d4955c7296b56cd768b03986f905e16c3271f81b3b7b5f39bde0fa9b5fbbd5a8"
+    }
+  },
+  "documents": 4,
+  "failed_documents": {},
+  "ingestion": {
+    "folder": "test",
+    "files": 4,
+    "processed": 4,
+    "succeeded": 4,
+    "cached": 0,
+    "empty_text": 0,
+    "failed": 0,
+    "unsupported": 0,
+    "by_type": {
+      "docx": 2,
+      "png": 2
+    },
+    "with_warnings": 1,
+    "failed_documents": {},
+    "seconds": 917.6
+  },
+  "highest_train_test_text_overlap": [
+    {
+      "a": "test/95980236-Rental-Agreement",
+      "b": "train/50070534-RENTAL-AGREEMENT",
+      "similarity": 0.1
+    },
+    {
+      "a": "test/95980236-Rental-Agreement",
+      "b": "train/47854715-RENTAL-AGREEMENT",
+      "similarity": 0.097
+    },
+    {
+      "a": "test/95980236-Rental-Agreement",
+      "b": "train/54945838-Rental-Agreement",
+      "similarity": 0.093
+    }
+  ],
+  "timings": {
+    "ingestion_seconds": 917.6,
+    "extraction_seconds": 127.7,
+    "per_document_extraction_seconds": {
+      "156155545-Rental-Agreement-Kns-Home": 37.0,
+      "228094620-Rental-Agreement": 53.4,
+      "24158401-Rental-Agreement": 24.9,
+      "95980236-Rental-Agreement": 12.4
+    },
+    "per_document_ingestion_seconds": {
+      "156155545-Rental-Agreement-Kns-Home": 0.02,
+      "228094620-Rental-Agreement": 0.01,
+      "24158401-Rental-Agreement": 327.16,
+      "95980236-Rental-Agreement": 590.3
+    }
+  },
+  "tokens": {
+    "156155545-Rental-Agreement-Kns-Home": [
+      2880,
+      742
+    ],
+    "228094620-Rental-Agreement": [
+      3105,
+      744
+    ],
+    "24158401-Rental-Agreement": [
+      2635,
+      601
+    ],
+    "95980236-Rental-Agreement": [
+      2654,
+      593
+    ]
+  },
+  "warnings": {
+    "156155545-Rental-Agreement-Kns-Home": [
+      "Party One: evidence quote not found verbatim in the document"
+    ],
+    "24158401-Rental-Agreement": [
+      "Renewal Notice (Days): evidence quote not found verbatim in the document"
+    ],
+    "95980236-Rental-Agreement": [
+      "Party Two: evidence quote not found verbatim in the document"
+    ]
+  },
+  "metrics": {
+    "documents_scored": 4,
+    "documents_without_prediction": [],
+    "predictions_without_label": [],
+    "excluded": {},
+    "fields": {
+      "Aggrement Value": {
+        "denominator": 4,
+        "raw_true": 4,
+        "raw_recall": 1.0,
+        "normalized_true": 4,
+        "normalized_recall": 1.0,
+        "not_extracted": 0,
+        "blank_reference": 0,
+        "unattainable_reference": 0,
+        "definition": "4 documents with a non-blank reference for 'Aggrement Value'; 0 blank reference(s) excluded"
+      },
+      "Aggrement Start Date": {
+        "denominator": 4,
+        "raw_true": 4,
+        "raw_recall": 1.0,
+        "normalized_true": 4,
+        "normalized_recall": 1.0,
+        "not_extracted": 0,
+        "blank_reference": 0,
+        "unattainable_reference": 0,
+        "definition": "4 documents with a non-blank reference for 'Aggrement Start Date'; 0 blank reference(s) excluded"
+      },
+      "Aggrement End Date": {
+        "denominator": 4,
+        "raw_true": 3,
+        "raw_recall": 0.75,
+        "normalized_true": 3,
+        "normalized_recall": 0.75,
+        "not_extracted": 0,
+        "blank_reference": 0,
+        "unattainable_reference": 0,
+        "definition": "4 documents with a non-blank reference for 'Aggrement End Date'; 0 blank reference(s) excluded"
+      },
+      "Renewal Notice (Days)": {
+        "denominator": 4,
+        "raw_true": 4,
+        "raw_recall": 1.0,
+        "normalized_true": 4,
+        "normalized_recall": 1.0,
+        "not_extracted": 0,
+        "blank_reference": 0,
+        "unattainable_reference": 0,
+        "definition": "4 documents with a non-blank reference for 'Renewal Notice (Days)'; 0 blank reference(s) excluded"
+      },
+      "Party One": {
+        "denominator": 4,
+        "raw_true": 0,
+        "raw_recall": 0.0,
+        "normalized_true": 3,
+        "normalized_recall": 0.75,
+        "not_extracted": 0,
+        "blank_reference": 0,
+        "unattainable_reference": 0,
+        "definition": "4 documents with a non-blank reference for 'Party One'; 0 blank reference(s) excluded"
+      },
+      "Party Two": {
+        "denominator": 4,
+        "raw_true": 0,
+        "raw_recall": 0.0,
+        "normalized_true": 1,
+        "normalized_recall": 0.25,
+        "not_extracted": 0,
+        "blank_reference": 0,
+        "unattainable_reference": 0,
+        "definition": "4 documents with a non-blank reference for 'Party Two'; 0 blank reference(s) excluded"
+      }
+    },
+    "macro_raw_recall": 0.625,
+    "macro_normalized_recall": 0.7917,
+    "micro_raw_recall": 0.625,
+    "micro_normalized_recall": 0.7917
+  }
+}

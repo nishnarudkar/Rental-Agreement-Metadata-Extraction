@@ -1,0 +1,25 @@
+document,field,reference,prediction,counted,raw_match,normalized_match,outcome,unattainable_reference
+24158401-Rental-Agreement,Aggrement Value,12000,12000,True,True,True,exact match,False
+24158401-Rental-Agreement,Aggrement Start Date,01.04.2008,01.04.2008,True,True,True,exact match,False
+24158401-Rental-Agreement,Aggrement End Date,31.03.2009,31.03.2009,True,True,True,exact match,False
+24158401-Rental-Agreement,Renewal Notice (Days),60,60,True,True,True,exact match,False
+24158401-Rental-Agreement,Party One,Hanumaiah ,Hanumaiah,True,False,True,match after normalisation only,False
+24158401-Rental-Agreement,Party Two, Vishal Bhardwaj ,Vishal Bhardwaj S/O Charnel Singh,True,False,False,mismatch,False
+95980236-Rental-Agreement,Aggrement Value,9000,9000,True,True,True,exact match,False
+95980236-Rental-Agreement,Aggrement Start Date,01.04.2010,01.04.2010,True,True,True,exact match,False
+95980236-Rental-Agreement,Aggrement End Date,31.03.2011,28.02.2011,True,False,False,mismatch,False
+95980236-Rental-Agreement,Renewal Notice (Days),30,30,True,True,True,exact match,False
+95980236-Rental-Agreement,Party One, S.Sakunthala,S.Sakunthala,True,False,True,match after normalisation only,False
+95980236-Rental-Agreement,Party Two,V.V.Ravi Kian,"V.V.Ravi Kian, S/o V.R.G.Sastry",True,False,False,mismatch,False
+156155545-Rental-Agreement-Kns-Home,Aggrement Value,12000,12000,True,True,True,exact match,False
+156155545-Rental-Agreement-Kns-Home,Aggrement Start Date,15.12.2012,15.12.2012,True,True,True,exact match,False
+156155545-Rental-Agreement-Kns-Home,Aggrement End Date,14.11.2013,14.11.2013,True,True,True,exact match,False
+156155545-Rental-Agreement-Kns-Home,Renewal Notice (Days),30,30,True,True,True,exact match,False
+156155545-Rental-Agreement-Kns-Home,Party One,V.K.NATARAJ ,"V.K.NATARAJ, son of V.KANDASWAMI CHETTIAR",True,False,False,mismatch,False
+156155545-Rental-Agreement-Kns-Home,Party Two, VYSHNAVI DAIRY SPECIALITIES Private Ltd,VYSHNAVI DAIRY SPECIALITIES Private Ltd.,True,False,True,match after normalisation only,False
+228094620-Rental-Agreement,Aggrement Value,15000,15000,True,True,True,exact match,False
+228094620-Rental-Agreement,Aggrement Start Date,07.07.2013,07.07.2013,True,True,True,exact match,False
+228094620-Rental-Agreement,Aggrement End Date,06.06.2014,06.06.2014,True,True,True,exact match,False
+228094620-Rental-Agreement,Renewal Notice (Days),30,30,True,True,True,exact match,False
+228094620-Rental-Agreement,Party One, KAPIL MEHROTRA ,KAPIL MEHROTRA,True,False,True,match after normalisation only,False
+228094620-Rental-Agreement,Party Two,.B.Kishore ,"B.Kishore , S/o. Mr. B. Pampaiah",True,False,False,mismatch,False

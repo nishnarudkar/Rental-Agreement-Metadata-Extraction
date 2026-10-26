@@ -1,0 +1,78 @@
+{
+  "documents_scored": 4,
+  "documents_without_prediction": [],
+  "predictions_without_label": [],
+  "excluded": {},
+  "fields": {
+    "Aggrement Value": {
+      "denominator": 4,
+      "raw_true": 4,
+      "raw_recall": 1.0,
+      "normalized_true": 4,
+      "normalized_recall": 1.0,
+      "not_extracted": 0,
+      "blank_reference": 0,
+      "unattainable_reference": 0,
+      "definition": "4 documents with a non-blank reference for 'Aggrement Value'; 0 blank reference(s) excluded"
+    },
+    "Aggrement Start Date": {
+      "denominator": 4,
+      "raw_true": 4,
+      "raw_recall": 1.0,
+      "normalized_true": 4,
+      "normalized_recall": 1.0,
+      "not_extracted": 0,
+      "blank_reference": 0,
+      "unattainable_reference": 0,
+      "definition": "4 documents with a non-blank reference for 'Aggrement Start Date'; 0 blank reference(s) excluded"
+    },
+    "Aggrement End Date": {
+      "denominator": 4,
+      "raw_true": 3,
+      "raw_recall": 0.75,
+      "normalized_true": 3,
+      "normalized_recall": 0.75,
+      "not_extracted": 0,
+      "blank_reference": 0,
+      "unattainable_reference": 0,
+      "definition": "4 documents with a non-blank reference for 'Aggrement End Date'; 0 blank reference(s) excluded"
+    },
+    "Renewal Notice (Days)": {
+      "denominator": 4,
+      "raw_true": 4,
+      "raw_recall": 1.0,
+      "normalized_true": 4,
+      "normalized_recall": 1.0,
+      "not_extracted": 0,
+      "blank_reference": 0,
+      "unattainable_reference": 0,
+      "definition": "4 documents with a non-blank reference for 'Renewal Notice (Days)'; 0 blank reference(s) excluded"
+    },
+    "Party One": {
+      "denominator": 4,
+      "raw_true": 0,
+      "raw_recall": 0.0,
+      "normalized_true": 3,
+      "normalized_recall": 0.75,
+      "not_extracted": 0,
+      "blank_reference": 0,
+      "unattainable_reference": 0,
+      "definition": "4 documents with a non-blank reference for 'Party One'; 0 blank reference(s) excluded"
+    },
+    "Party Two": {
+      "denominator": 4,
+      "raw_true": 0,
+      "raw_recall": 0.0,
+      "normalized_true": 1,
+      "normalized_recall": 0.25,
+      "not_extracted": 0,
+      "blank_reference": 0,
+      "unattainable_reference": 0,
+      "definition": "4 documents with a non-blank reference for 'Party Two'; 0 blank reference(s) excluded"
+    }
+  },
+  "macro_raw_recall": 0.625,
+  "macro_normalized_recall": 0.7917,
+  "micro_raw_recall": 0.625,
+  "micro_normalized_recall": 0.7917
+}

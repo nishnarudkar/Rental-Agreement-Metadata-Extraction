@@ -1,0 +1,105 @@
+{
+  "document_id": "228094620-Rental-Agreement",
+  "status": "ok",
+  "prediction": {
+    "Aggrement Value": 15000,
+    "Aggrement Start Date": "07.07.2013",
+    "Aggrement End Date": "06.06.2014",
+    "Renewal Notice (Days)": 30,
+    "Party One": "KAPIL MEHROTRA",
+    "Party Two": "B.Kishore , S/o. Mr. B. Pampaiah"
+  },
+  "evidence": {
+    "Aggrement Value": {
+      "value": 15000,
+      "evidence": "Rs. 15,000.00 (Rupees Fifteen Thousand Only)",
+      "evidence_found": true
+    },
+    "Aggrement Start Date": {
+      "value": "07.07.2013",
+      "evidence": "The term of rental agreement is for a period of 11 months with effect from 7st July, 2013",
+      "evidence_found": true
+    },
+    "Aggrement End Date": {
+      "value": "06.06.2014",
+      "evidence": "to 6th June, 2014",
+      "evidence_found": true
+    },
+    "Renewal Notice (Days)": {
+      "value": 30,
+      "evidence": "The tenant will have to vacate the flat with one months notice if found causing damage intentionally / deliberately to the property or the furniture’s and fixtures listed in point 16 without refund of any deposit or advance rent.",
+      "evidence_found": true
+    },
+    "Party One": {
+      "value": "KAPIL MEHROTRA",
+      "evidence": "Mr. KAPIL MEHROTRA aged about 38 years, Owner of Plot.No.566-569, Flat.No.303, Shasank Rose Mount Apartment, Kavya Avenue Layout, Bachupally, Hyderabad, Ranga Reddy District-500090, and Andhra Pradesh.",
+      "evidence_found": true
+    },
+    "Party Two": {
+      "value": "B.Kishore , S/o. Mr. B. Pampaiah",
+      "evidence": "Mr.B.Kishore , S/o. Mr. B. Pampaiah , aged about 31 years, R/o House no 46-107 A, 46-266, Nundy 46-365 , Budhwarpet 46-263, Kumool, Andhra Pradesh & Plot no 22 , House no 50 / 760 A - 23 Gayathri enclave , Devanagar, Kurnool, A.P",
+      "evidence_found": true
+    }
+  },
+  "warnings": [],
+  "verification": null,
+  "error": null,
+  "attempts": 1,
+  "seconds": 53.4,
+  "prompt_tokens": 3105,
+  "output_tokens": 744,
+  "extraction": {
+    "party_one": {
+      "title": "Mr.",
+      "name": "KAPIL MEHROTRA",
+      "relation": null,
+      "representative": null,
+      "evidence": "Mr. KAPIL MEHROTRA aged about 38 years, Owner of Plot.No.566-569, Flat.No.303, Shasank Rose Mount Apartment, Kavya Avenue Layout, Bachupally, Hyderabad, Ranga Reddy District-500090, and Andhra Pradesh."
+    },
+    "party_two": {
+      "title": null,
+      "name": "B.Kishore , S/o. Mr. B. Pampaiah",
+      "relation": null,
+      "representative": null,
+      "evidence": "Mr.B.Kishore , S/o. Mr. B. Pampaiah , aged about 31 years, R/o House no 46-107 A, 46-266, Nundy 46-365 , Budhwarpet 46-263, Kumool, Andhra Pradesh & Plot no 22 , House no 50 / 760 A - 23 Gayathri enclave , Devanagar, Kurnool, A.P"
+    },
+    "monthly_rent": {
+      "value": 15000,
+      "evidence": "Rs. 15,000.00 (Rupees Fifteen Thousand Only)"
+    },
+    "security_deposit": {
+      "value": 45000,
+      "evidence": "Rs.45, 000-00 (Rupees Forty five Thousand Only)"
+    },
+    "advance_rent": {
+      "value": 165000,
+      "evidence": "Rs.165, 000/-(one lakh sixty five thousand Rupees Only)"
+    },
+    "execution_date": {
+      "value": "02.07.2013",
+      "evidence": "This Rental Agreement is made and executed on this the 2ndth day of July, 2013"
+    },
+    "tenancy_start_date": {
+      "value": "07.07.2013",
+      "evidence": "The term of rental agreement is for a period of 11 months with effect from 7st July, 2013"
+    },
+    "tenancy_end_date": {
+      "value": "06.06.2014",
+      "evidence": "to 6th June, 2014"
+    },
+    "term": {
+      "months": 11,
+      "evidence": "The term of rental agreement is for a period of 11 months with effect from 7st July, 2013 to 6th June, 2014"
+    },
+    "termination_notice": {
+      "value": 1,
+      "unit": "months",
+      "evidence": "The tenant will have to vacate the flat with one months notice if found causing damage intentionally / deliberately to the property or the furniture’s and fixtures listed in point 16 without refund of any deposit or advance rent."
+    },
+    "renewal_notice": {
+      "value": null,
+      "unit": null,
+      "evidence": null
+    }
+  }
+}
