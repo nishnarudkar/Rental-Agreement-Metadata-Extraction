@@ -1,6 +1,9 @@
-# Install with:  python -m pip install -r requirements.txt
+# Direct dependencies (compatible ranges). Install with:
+#   python -m pip install -r requirements.txt
+# The exact versions the project was tested with are in requirements-lock.txt.
 
 # Data processing
+numpy>=1.26,<3.0
 pandas>=2.2,<3.0
 
 # DOCX and image I/O
@@ -19,13 +22,12 @@ ollama>=0.5,<1.0
 # Structured output validation
 pydantic>=2.0,<3.0
 
-# Notebook development
-jupyterlab>=4.0,<5.0
-ipykernel>=6.0,<8.0
+# .env configuration (LLM_MODEL, LLM_NUM_CTX, OLLAMA_HOST)
+python-dotenv>=1.0,<2.0
 
 # Testing
 pytest>=8.0,<10.0
 
-# Progress bars and .env configuration
-tqdm>=4.66,<5.0
-python-dotenv>=1.0,<2.0
+# Notebook (dataset audit)
+jupyterlab>=4.0,<5.0
+ipykernel>=6.0,<8.0
