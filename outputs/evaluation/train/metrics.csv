@@ -1,7 +1,0 @@
-field,denominator,raw_true,raw_recall,normalized_true,normalized_recall,not_extracted,blank_reference,unattainable_reference
-Aggrement Value,2,2,1.0,2,1.0,0,0,0
-Aggrement Start Date,2,2,1.0,2,1.0,0,0,0
-Aggrement End Date,2,0,0.0,0,0.0,0,0,2
-Renewal Notice (Days),2,2,1.0,2,1.0,0,0,0
-Party One,2,0,0.0,1,0.5,0,0,0
-Party Two,2,0,0.0,1,0.5,0,0,0
