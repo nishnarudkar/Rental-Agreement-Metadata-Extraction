@@ -1,0 +1,100 @@
+{
+  "document_id": "44737744-Maddireddy-Bhargava-Reddy-Rental-Agreement",
+  "status": "ok",
+  "prediction": {
+    "Aggrement Value": 9997,
+    "Aggrement Start Date": "01.01.2010",
+    "Aggrement End Date": null,
+    "Renewal Notice (Days)": null,
+    "Party One": "M. V. VIJAY A SHANKAR, S/o, M. Rangaiah",
+    "Party Two": "MADDIREDDY BHARGAVA REDDY, S/O,MADDIREDDY SUBBA REDDY"
+  },
+  "evidence": {
+    "Aggrement Value": {
+      "value": 9997,
+      "evidence": "agreed to pay the monthly rent on or before 5th day of every month at Rs 9.99.7.9° p.m.",
+      "evidence_found": true
+    },
+    "Aggrement Start Date": {
+      "value": "01.01.2010",
+      "evidence": "This Rental Agreement is made and executed on this the .?.??& day of 2010 at Hyderabad",
+      "evidence_found": true
+    },
+    "Aggrement End Date": {
+      "value": null,
+      "evidence": "11 months",
+      "evidence_found": true
+    },
+    "Renewal Notice (Days)": {
+      "value": null,
+      "evidence": null,
+      "evidence_found": false
+    },
+    "Party One": {
+      "value": "M. V. VIJAY A SHANKAR, S/o, M. Rangaiah",
+      "evidence": "M. V, V« VI JAY A SHANKAR, S/o, M, Rangaiah",
+      "evidence_found": true
+    },
+    "Party Two": {
+      "value": "MADDIREDDY BHARGAVA REDDY, S/O,MADDIREDDY SUBBA REDDY",
+      "evidence": "MADDIREDDY BHARGAVA REDDY, S/O,MADDIREDDY SUBBA REDDY",
+      "evidence_found": true
+    }
+  },
+  "warnings": [],
+  "error": null,
+  "attempts": 3,
+  "seconds": 43.1,
+  "prompt_tokens": 2125,
+  "output_tokens": 448,
+  "extraction": {
+    "party_one": {
+      "name": "M. V. VIJAY A SHANKAR, S/o, M. Rangaiah",
+      "representative": null,
+      "evidence": "M. V, V« VI JAY A SHANKAR, S/o, M, Rangaiah"
+    },
+    "party_two": {
+      "name": "MADDIREDDY BHARGAVA REDDY, S/O,MADDIREDDY SUBBA REDDY",
+      "representative": null,
+      "evidence": "MADDIREDDY BHARGAVA REDDY, S/O,MADDIREDDY SUBBA REDDY"
+    },
+    "monthly_rent": {
+      "value": 9997,
+      "evidence": "agreed to pay the monthly rent on or before 5th day of every month at Rs 9.99.7.9° p.m."
+    },
+    "security_deposit": {
+      "value": null,
+      "evidence": null
+    },
+    "advance_rent": {
+      "value": null,
+      "evidence": null
+    },
+    "execution_date": {
+      "value": "01.01.2010",
+      "evidence": "This Rental Agreement is made and executed on this the .?.??& day of 2010 at Hyderabad"
+    },
+    "tenancy_start_date": {
+      "value": null,
+      "evidence": "In witnesses whereof both the parties have signed on this the"
+    },
+    "tenancy_end_date": {
+      "value": null,
+      "evidence": "11 months"
+    },
+    "term": {
+      "months": 11,
+      "evidence": "for the purposes of Resident iai__|iroofo"
+    },
+    "termination_notice": {
+      "value": null,
+      "unit": null,
+      "evidence": null
+    },
+    "renewal_notice": {
+      "value": null,
+      "unit": null,
+      "evidence": null
+    }
+  }
+}

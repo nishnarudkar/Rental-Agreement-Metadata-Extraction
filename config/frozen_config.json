@@ -1,0 +1,26 @@
+{
+  "extractor_config_name": "v3",
+  "extractor_config": {
+    "prompt_version": "v3",
+    "derive_end_date": true,
+    "salvage": true,
+    "verify": false
+  },
+  "max_attempts": 3,
+  "system_prompt_sha256": "22ff42ae543be5bc153bc471ad7dde279c6288815fea4630500b97463abeca2a",
+  "schema_sha256": "0e689147cb30f704300e8142f8ae9d1d2a12d3af2c6462e0b33b6d305a533001",
+  "normalizer_sha256": "cbfcad790779d3b07cd5b8d856969f07e3dd6e595e5aef2470226c2bf26fd405",
+  "model": "qwen2.5:7b",
+  "llm_options": {
+    "temperature": 0.0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "num_predict": 1024
+  },
+  "ocr": {
+    "tile_height": 1600,
+    "tile_overlap": 200,
+    "paragraph_gap": 1.5,
+    "engine_settings_sha256": "d4955c7296b56cd768b03986f905e16c3271f81b3b7b5f39bde0fa9b5fbbd5a8"
+  }
+}

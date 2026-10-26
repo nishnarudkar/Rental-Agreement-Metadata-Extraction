@@ -1,0 +1,31 @@
+document,field,reference,prediction,counted,raw_match,normalized_match,outcome,unattainable_reference
+6683127-House-Rental-Contract-GERALDINE-GALINATO-v2-Page-1,Aggrement Value,6500,6500,True,True,True,exact match,False
+6683127-House-Rental-Contract-GERALDINE-GALINATO-v2-Page-1,Aggrement Start Date,20.05.2007,20.05.2007,True,True,True,exact match,False
+6683127-House-Rental-Contract-GERALDINE-GALINATO-v2-Page-1,Aggrement End Date,20.05.2008,20.05.2008,True,True,True,exact match,False
+6683127-House-Rental-Contract-GERALDINE-GALINATO-v2-Page-1,Renewal Notice (Days),15,90,True,False,False,mismatch,False
+6683127-House-Rental-Contract-GERALDINE-GALINATO-v2-Page-1,Party One,"Antonio Levy S. Ingles, Jr. and/or Mary Rose C. Ingles",Antonio Levy S. Ingles. Jr. and/or Mary Rose C. Ingles,True,False,True,match after normalisation only,False
+6683127-House-Rental-Contract-GERALDINE-GALINATO-v2-Page-1,Party Two,GERALDINE Q. GALINATO,GERALDINE O. GALINATO,True,False,False,mismatch,False
+6683129-House-Rental-Contract-Geraldine-Galinato-v2,Aggrement Value,6500,6500,True,True,True,exact match,False
+6683129-House-Rental-Contract-Geraldine-Galinato-v2,Aggrement Start Date,20.05.2007,20.05.2007,True,True,True,exact match,False
+6683129-House-Rental-Contract-Geraldine-Galinato-v2,Aggrement End Date,20.05.2008,20.05.2008,True,True,True,exact match,False
+6683129-House-Rental-Contract-Geraldine-Galinato-v2,Renewal Notice (Days),15,15,True,True,True,exact match,False
+6683129-House-Rental-Contract-Geraldine-Galinato-v2,Party One,"Antonio Levy S. Ingles, Jr. and/or Mary Rose C. Ingles",Antonio Levy S. Ingles. Jr. and/or Mary Rose C. Ingles,True,False,True,match after normalisation only,False
+6683129-House-Rental-Contract-Geraldine-Galinato-v2,Party Two,GERALDINE Q. GALINATO,GERALDINE O. GALINATO,True,False,False,mismatch,False
+36199312-Rental-Agreement,Aggrement Value,3800,3800,True,True,True,exact match,False
+36199312-Rental-Agreement,Aggrement Start Date,01.05.2010,01.05.2010,True,True,True,exact match,False
+36199312-Rental-Agreement,Aggrement End Date,31.04.2011,31.03.2011,True,False,False,mismatch,True
+36199312-Rental-Agreement,Renewal Notice (Days),30,30,True,True,True,exact match,False
+36199312-Rental-Agreement,Party One,Balaji.R ,Mr. Balaji.R,True,False,True,match after normalisation only,False
+36199312-Rental-Agreement,Party Two,Kartheek R,1 Mr.Kartheek R,True,False,False,mismatch,False
+44737744-Maddireddy-Bhargava-Reddy-Rental-Agreement,Aggrement Value,3000,9997,True,False,False,mismatch,False
+44737744-Maddireddy-Bhargava-Reddy-Rental-Agreement,Aggrement Start Date,20.09.2010,01.01.2010,True,False,False,mismatch,False
+44737744-Maddireddy-Bhargava-Reddy-Rental-Agreement,Aggrement End Date,19.07.2011,,True,False,False,not extracted,False
+44737744-Maddireddy-Bhargava-Reddy-Rental-Agreement,Renewal Notice (Days),,,False,False,False,blank reference (not counted),False
+44737744-Maddireddy-Bhargava-Reddy-Rental-Agreement,Party One,M.V.V. VIJAYA SHANKAR,"M. V. VIJAY A SHANKAR, S/o, M. Rangaiah",True,False,False,mismatch,False
+44737744-Maddireddy-Bhargava-Reddy-Rental-Agreement,Party Two,MADDIREDDY BHARGAVA REDDY,"MADDIREDDY BHARGAVA REDDY, S/O,MADDIREDDY SUBBA REDDY",True,False,False,mismatch,False
+47854715-RENTAL-AGREEMENT,Aggrement Value,9000,9000,True,True,True,exact match,False
+47854715-RENTAL-AGREEMENT,Aggrement Start Date,01.04.2010,01.04.2010,True,True,True,exact match,False
+47854715-RENTAL-AGREEMENT,Aggrement End Date,31.02.2011,30.04.2011,True,False,False,mismatch,True
+47854715-RENTAL-AGREEMENT,Renewal Notice (Days),60,60,True,True,True,exact match,False
+47854715-RENTAL-AGREEMENT,Party One, P C MATHEW,"Mr. P C MATHEW, S/O K JOSEPH CHACKO",True,False,False,mismatch,False
+47854715-RENTAL-AGREEMENT,Party Two, L GOPINATH ,Mr. L GOPINATH S/o of G LAKSHMI NARISIMHAN,True,False,False,mismatch,False

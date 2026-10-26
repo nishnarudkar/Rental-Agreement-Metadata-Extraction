@@ -1,0 +1,13 @@
+document,field,reference,prediction,counted,raw_match,normalized_match,outcome,unattainable_reference
+18325926-Rental-Agreement-1,Aggrement Value,4000,4000,True,True,True,exact match,False
+18325926-Rental-Agreement-1,Aggrement Start Date,05.12.2008,05.12.2008,True,True,True,exact match,False
+18325926-Rental-Agreement-1,Aggrement End Date,31.11.2009,04.11.2009,True,False,False,mismatch,True
+18325926-Rental-Agreement-1,Renewal Notice (Days),90,90,True,True,True,exact match,False
+18325926-Rental-Agreement-1,Party One,MR.K.Kuttan ,K.Kuttan S/o Kelu Aehari (Late),True,False,False,mismatch,False
+18325926-Rental-Agreement-1,Party Two,P.M. Narayana Namboodri ,Sri. P.M. Narayana Namboodri “Laxmi Leela”,True,False,False,mismatch,False
+50070534-RENTAL-AGREEMENT,Aggrement Value,10000,10000,True,True,True,exact match,False
+50070534-RENTAL-AGREEMENT,Aggrement Start Date,01.04.2010 ,01.04.2010,True,False,True,match after normalisation only,False
+50070534-RENTAL-AGREEMENT,Aggrement End Date,30.03.2011,30.03.2011,True,True,True,exact match,False
+50070534-RENTAL-AGREEMENT,Renewal Notice (Days),90,90,True,True,True,exact match,False
+50070534-RENTAL-AGREEMENT,Party One, P. JohnsonRavikumar,P. JohnsonRavikumar,True,False,True,match after normalisation only,False
+50070534-RENTAL-AGREEMENT,Party Two,Saravanan BV ,Saravanan BV,True,False,True,match after normalisation only,False

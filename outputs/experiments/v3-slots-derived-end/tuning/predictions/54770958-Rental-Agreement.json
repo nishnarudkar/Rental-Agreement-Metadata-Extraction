@@ -1,0 +1,105 @@
+{
+  "document_id": "54770958-Rental-Agreement",
+  "status": "ok",
+  "prediction": {
+    "Aggrement Value": 5500,
+    "Aggrement Start Date": "20.04.2011",
+    "Aggrement End Date": "19.03.2012",
+    "Renewal Notice (Days)": 60,
+    "Party One": "Asha Ramesh RAMESH.K.N",
+    "Party Two": "Sadasivuni Deepti Sadasivuni Kiran"
+  },
+  "evidence": {
+    "Aggrement Value": {
+      "value": 5500,
+      "evidence": "Rs.5500/-(Five thousand five hundred only}",
+      "evidence_found": true
+    },
+    "Aggrement Start Date": {
+      "value": "20.04.2011",
+      "evidence": "The rent agreem ent shall be in force for a period of 11 (months) from the date of Tenancy.",
+      "evidence_found": true
+    },
+    "Aggrement End Date": {
+      "value": "19.03.2012",
+      "evidence": "The rent agreem ent shall be in force for a period of 11 (months) from the date of Tenancy.",
+      "evidence_found": true
+    },
+    "Renewal Notice (Days)": {
+      "value": 60,
+      "evidence": "It is hereby agreed that 2{Two} months' notice is required on either side for the termination of this Rental Agreement and all the keys &items returned as mentioned in the schedule below.",
+      "evidence_found": true
+    },
+    "Party One": {
+      "value": "Asha Ramesh RAMESH.K.N",
+      "evidence": "Mrs.Asha Ramesh &Mr.Ramesh.K.N",
+      "evidence_found": true
+    },
+    "Party Two": {
+      "value": "Sadasivuni Deepti Sadasivuni Kiran",
+      "evidence": "Mrs.Sadasivuni Deepti & Mr.Sadasivuni Kiran",
+      "evidence_found": true
+    }
+  },
+  "warnings": [],
+  "verification": null,
+  "error": null,
+  "attempts": 1,
+  "seconds": 25.7,
+  "prompt_tokens": 2662,
+  "output_tokens": 513,
+  "extraction": {
+    "party_one": {
+      "title": "Mrs.",
+      "name": "Asha Ramesh RAMESH.K.N",
+      "relation": null,
+      "representative": null,
+      "evidence": "Mrs.Asha Ramesh &Mr.Ramesh.K.N"
+    },
+    "party_two": {
+      "title": "Mrs.",
+      "name": "Sadasivuni Deepti Sadasivuni Kiran",
+      "relation": null,
+      "representative": null,
+      "evidence": "Mrs.Sadasivuni Deepti & Mr.Sadasivuni Kiran"
+    },
+    "monthly_rent": {
+      "value": 5500,
+      "evidence": "Rs.5500/-(Five thousand five hundred only}"
+    },
+    "security_deposit": {
+      "value": 55000,
+      "evidence": "Rs. 55,O00/-(Rs. Fifty five thousand only)"
+    },
+    "advance_rent": {
+      "value": null,
+      "evidence": null
+    },
+    "execution_date": {
+      "value": "20.04.2011",
+      "evidence": "This RENTAL AGREEMENT is made & executed on 20 April 2011"
+    },
+    "tenancy_start_date": {
+      "value": "20.04.2011",
+      "evidence": "The rent agreem ent shall be in force for a period of 11 (months) from the date of Tenancy."
+    },
+    "tenancy_end_date": {
+      "value": null,
+      "evidence": null
+    },
+    "term": {
+      "months": 11,
+      "evidence": "The rent agreem ent shall be in force for a period of 11 (months) from the date of Tenancy."
+    },
+    "termination_notice": {
+      "value": 2,
+      "unit": "months",
+      "evidence": "It is hereby agreed that 2{Two} months' notice is required on either side for the termination of this Rental Agreement and all the keys &items returned as mentioned in the schedule below."
+    },
+    "renewal_notice": {
+      "value": null,
+      "unit": null,
+      "evidence": null
+    }
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "document_id": "47854715-RENTAL-AGREEMENT",
+  "status": "ok",
+  "prediction": {
+    "Aggrement Value": 9000,
+    "Aggrement Start Date": "01.04.2010",
+    "Aggrement End Date": "28.02.2011",
+    "Renewal Notice (Days)": 60,
+    "Party One": "P C MATHEW, S/O K JOSEPH CHACKO",
+    "Party Two": "L GOPINATH S/o G LAKSHMI NARISIMHAN"
+  },
+  "evidence": {
+    "Aggrement Value": {
+      "value": 9000,
+      "evidence": "on a monthly rent of Rs.9000/-(Rupees Seven thousand only)",
+      "evidence_found": true
+    },
+    "Aggrement Start Date": {
+      "value": "01.04.2010",
+      "evidence": "the party of the second part witnesses.\\nThe party of the first part being the owner of the premises at Flat No C 8 SAMS AVENUE APPARTMENT No 65 VALLUVAR ST ARUMBAKKAM CHENNAI 600106 has agreed to let the above premises to the party of the second part for residential use on a monthly rent of Rs.9000 (Rupees Nine Thousand Only) plus monthly maintenance expenses levied on by the association, on condition of his accepting to take on hire the house with amenities provided therein and whereas the party of the second part has agreed and will occupy the premises From 1st April 2010.",
+      "evidence_found": false
+    },
+    "Aggrement End Date": {
+      "value": "28.02.2011",
+      "evidence": "The lessor hereby let on lease the house to the lessee on a monthly rent of Rs.9000/-(Rupees Seven thousand only) for a period of 11 months starting from 1st of April 2010.",
+      "evidence_found": true
+    },
+    "Renewal Notice (Days)": {
+      "value": 60,
+      "evidence": "Two months notice on either side shall be the condition for the lessor and lessee to terminate this lease to voluntarily vacate the premises.",
+      "evidence_found": true
+    },
+    "Party One": {
+      "value": "P C MATHEW, S/O K JOSEPH CHACKO",
+      "evidence": "RENTAL AGREEMENT THIS DEED OF RENTAL AGREEMENT ENTERED INTO AT CHENNAI ON 21st OF MARCH 2010 BETWEEN Mr. P C MATHEW, S/O K JOSEPH CHACKO, hereinafter called the party of the first part",
+      "evidence_found": true
+    },
+    "Party Two": {
+      "value": "L GOPINATH S/o G LAKSHMI NARISIMHAN",
+      "evidence": "RENTAL AGREEMENT THIS DEED OF RENTAL AGREEMENT ENTERED INTO AT CHENNAI ON 21st OF MARCH 2010 BETWEEN Mr. P C MATHEW, S/O K JOSEPH CHACKO, hereinafter called the party of the first part and between Mr. L GOPINATH S/o of G LAKSHMI NARISIMHAN after called the party of the second part witnesses.",
+      "evidence_found": true
+    }
+  },
+  "warnings": [
+    "Aggrement Start Date: evidence quote not found verbatim in the document"
+  ],
+  "verification": {
+    "agreement_value": true,
+    "start_date": true,
+    "end_date_or_term": true,
+    "notice": true,
+    "party_one": true,
+    "party_two": true
+  },
+  "error": null,
+  "attempts": 2,
+  "seconds": 37.2,
+  "prompt_tokens": 2890,
+  "output_tokens": 886,
+  "extraction": {
+    "party_one": {
+      "title": "Mr.",
+      "name": "P C MATHEW, S/O K JOSEPH CHACKO",
+      "relation": null,
+      "representative": null,
+      "evidence": "RENTAL AGREEMENT THIS DEED OF RENTAL AGREEMENT ENTERED INTO AT CHENNAI ON 21st OF MARCH 2010 BETWEEN Mr. P C MATHEW, S/O K JOSEPH CHACKO, hereinafter called the party of the first part"
+    },
+    "party_two": {
+      "title": "Mr.",
+      "name": "L GOPINATH S/o G LAKSHMI NARISIMHAN",
+      "relation": null,
+      "representative": null,
+      "evidence": "RENTAL AGREEMENT THIS DEED OF RENTAL AGREEMENT ENTERED INTO AT CHENNAI ON 21st OF MARCH 2010 BETWEEN Mr. P C MATHEW, S/O K JOSEPH CHACKO, hereinafter called the party of the first part and between Mr. L GOPINATH S/o of G LAKSHMI NARISIMHAN after called the party of the second part witnesses."
+    },
+    "monthly_rent": {
+      "value": 9000,
+      "evidence": "on a monthly rent of Rs.9000/-(Rupees Seven thousand only)"
+    },
+    "security_deposit": {
+      "value": 90000,
+      "evidence": "The lessee had kept deposited with the lessor a sum of Rs.90000/-(Rupees Ninety Five thousand only), as deposit without interest for the due performance of this agreement."
+    },
+    "advance_rent": {
+      "value": null,
+      "evidence": null
+    },
+    "execution_date": {
+      "value": "21.03.2010",
+      "evidence": "RENTAL AGREEMENT THIS DEED OF RENTAL AGREEMENT ENTERED INTO AT CHENNAI ON 21st OF MARCH 2010"
+    },
+    "tenancy_start_date": {
+      "value": "01.04.2010",
+      "evidence": "the party of the second part witnesses.\\nThe party of the first part being the owner of the premises at Flat No C 8 SAMS AVENUE APPARTMENT No 65 VALLUVAR ST ARUMBAKKAM CHENNAI 600106 has agreed to let the above premises to the party of the second part for residential use on a monthly rent of Rs.9000 (Rupees Nine Thousand Only) plus monthly maintenance expenses levied on by the association, on condition of his accepting to take on hire the house with amenities provided therein and whereas the party of the second part has agreed and will occupy the premises From 1st April 2010."
+    },
+    "tenancy_end_date": {
+      "value": null,
+      "evidence": null
+    },
+    "term": {
+      "months": 11,
+      "evidence": "The lessor hereby let on lease the house to the lessee on a monthly rent of Rs.9000/-(Rupees Seven thousand only) for a period of 11 months starting from 1st of April 2010."
+    },
+    "termination_notice": {
+      "value": 2,
+      "unit": "months",
+      "evidence": "Two months notice on either side shall be the condition for the lessor and lessee to terminate this lease to voluntarily vacate the premises."
+    },
+    "renewal_notice": {
+      "value": 1,
+      "unit": "months",
+      "evidence": "If the lessee desires to have this lease deed renewed for a further period after the expiry of eleven months, one month advance notice should be given in writing to the lessor for negotiating renewal on terms and conditions to be mutually agreed upon."
+    }
+  }
+}

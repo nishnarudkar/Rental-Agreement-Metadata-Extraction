@@ -1,0 +1,112 @@
+{
+  "document_id": "6683129-House-Rental-Contract-Geraldine-Galinato-v2",
+  "status": "ok",
+  "prediction": {
+    "Aggrement Value": 6500,
+    "Aggrement Start Date": "20.05.2007",
+    "Aggrement End Date": "20.05.2008",
+    "Renewal Notice (Days)": 15,
+    "Party One": "Antonio Levy S. Ingles, Jr. and/or Mary Rose C. Ingles",
+    "Party Two": "GERALDINE O. GALINATO, CELESTINO ALFARO, MIA ALFARO, JED ALFARO"
+  },
+  "evidence": {
+    "Aggrement Value": {
+      "value": 6500,
+      "evidence": "To pay as rental the sum of SIX THOUSAND FIVE HUNDRED PESOS IP 6.500.001 per month, due and payable in advance from the 20th day of every month.",
+      "evidence_found": true
+    },
+    "Aggrement Start Date": {
+      "value": "20.05.2007",
+      "evidence": "for the period commencing on the 20th day of May, 2007, and monthly thereafter until the 20th day of May, 2008, at which time this Agreement is terminated.",
+      "evidence_found": true
+    },
+    "Aggrement End Date": {
+      "value": "20.05.2008",
+      "evidence": "for the period commencing on the 20th day of May, 2007, and monthly thereafter until the 20th day of May, 2008, at which time this Agreement is terminated.",
+      "evidence_found": true
+    },
+    "Renewal Notice (Days)": {
+      "value": 15,
+      "evidence": "this contract may be terminated by mutual consent of the parties, or by either party giving written notice of at least 15 days prior to the end of any monthly period.",
+      "evidence_found": true
+    },
+    "Party One": {
+      "value": "Antonio Levy S. Ingles, Jr. and/or Mary Rose C. Ingles",
+      "evidence": "This House Rental Contract, made and entered into this 20th day of May 2007 at Manila by and between: Antonio Levy S. Ingles. Jr. and/or Mary Rose C. Ingles, of legal age, with residence and postal address at Unit 2006 EGI Taft Tower 2339 Taft Avenue, Malate, Manila, And herein referred to as the Owner(s),",
+      "evidence_found": true
+    },
+    "Party Two": {
+      "value": "GERALDINE O. GALINATO, CELESTINO ALFARO, MIA ALFARO, JED ALFARO",
+      "evidence": "— And — GERALDINE O. GALINATO of legal age, with residence and postal address at 6 Manganese Road, Pilar Village, Las Pinas, Metro Manila, And herein referred to as the Resident(s),",
+      "evidence_found": true
+    }
+  },
+  "warnings": [],
+  "verification": {
+    "agreement_value": true,
+    "start_date": true,
+    "end_date_or_term": true,
+    "notice": true,
+    "party_one": true,
+    "party_two": true
+  },
+  "error": null,
+  "attempts": 1,
+  "seconds": 21.9,
+  "prompt_tokens": 6537,
+  "output_tokens": 820,
+  "extraction": {
+    "party_one": {
+      "title": null,
+      "name": "Antonio Levy S. Ingles, Jr. and/or Mary Rose C. Ingles",
+      "relation": null,
+      "representative": null,
+      "evidence": "This House Rental Contract, made and entered into this 20th day of May 2007 at Manila by and between: Antonio Levy S. Ingles. Jr. and/or Mary Rose C. Ingles, of legal age, with residence and postal address at Unit 2006 EGI Taft Tower 2339 Taft Avenue, Malate, Manila, And herein referred to as the Owner(s),"
+    },
+    "party_two": {
+      "title": null,
+      "name": "GERALDINE O. GALINATO, CELESTINO ALFARO, MIA ALFARO, JED ALFARO",
+      "relation": null,
+      "representative": null,
+      "evidence": "— And — GERALDINE O. GALINATO of legal age, with residence and postal address at 6 Manganese Road, Pilar Village, Las Pinas, Metro Manila, And herein referred to as the Resident(s),"
+    },
+    "monthly_rent": {
+      "value": 6500,
+      "evidence": "To pay as rental the sum of SIX THOUSAND FIVE HUNDRED PESOS IP 6.500.001 per month, due and payable in advance from the 20th day of every month."
+    },
+    "security_deposit": {
+      "value": 6500,
+      "evidence": "Resident(s) agrees to pay a deposit in the amount of SIX THOUSAND FIVE HUNDRED PESOS IP 6.500.001 to secure Resident(s)’s pledge of full compliance with the terms of this agreement."
+    },
+    "advance_rent": {
+      "value": null,
+      "evidence": null
+    },
+    "execution_date": {
+      "value": "20.05.2007",
+      "evidence": "This House Rental Contract, made and entered into this 20th day of May 2007 at Manila"
+    },
+    "tenancy_start_date": {
+      "value": "20.05.2007",
+      "evidence": "for the period commencing on the 20th day of May, 2007, and monthly thereafter until the 20th day of May, 2008, at which time this Agreement is terminated."
+    },
+    "tenancy_end_date": {
+      "value": "20.05.2008",
+      "evidence": "for the period commencing on the 20th day of May, 2007, and monthly thereafter until the 20th day of May, 2008, at which time this Agreement is terminated."
+    },
+    "term": {
+      "months": 12,
+      "evidence": "for the period commencing on the 20th day of May, 2007, and monthly thereafter until the 20th day of May, 2008, at which time this Agreement is terminated."
+    },
+    "termination_notice": {
+      "value": 15,
+      "unit": "days",
+      "evidence": "this contract may be terminated by mutual consent of the parties, or by either party giving written notice of at least 15 days prior to the end of any monthly period."
+    },
+    "renewal_notice": {
+      "value": null,
+      "unit": null,
+      "evidence": null
+    }
+  }
+}

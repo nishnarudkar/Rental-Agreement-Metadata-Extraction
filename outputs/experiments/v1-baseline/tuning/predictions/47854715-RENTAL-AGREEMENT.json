@@ -1,0 +1,97 @@
+{
+  "document_id": "47854715-RENTAL-AGREEMENT",
+  "status": "ok",
+  "prediction": {
+    "Aggrement Value": 9000,
+    "Aggrement Start Date": "01.04.2010",
+    "Aggrement End Date": "30.04.2011",
+    "Renewal Notice (Days)": 60,
+    "Party One": "Mr. P C MATHEW, S/o K JOSEPH CHACKO",
+    "Party Two": "Mr. L GOPINATH S/o G LAKSHMI NARISIMHAN"
+  },
+  "evidence": {
+    "Aggrement Value": {
+      "value": 9000,
+      "evidence": "Rs.9000 (Rupees Nine Thousand Only)",
+      "evidence_found": true
+    },
+    "Aggrement Start Date": {
+      "value": "01.04.2010",
+      "evidence": "the party of the second part has agreed and will occupy the premises From 1st April 2010.",
+      "evidence_found": true
+    },
+    "Aggrement End Date": {
+      "value": "30.04.2011",
+      "evidence": "The lease is for a period of 11 months, commencing from this day, 1st of April 2010.",
+      "evidence_found": true
+    },
+    "Renewal Notice (Days)": {
+      "value": 60,
+      "evidence": "Two months notice on either side shall be the condition for the lessor and lessee to terminate this lease to voluntarily vacate the premises.",
+      "evidence_found": true
+    },
+    "Party One": {
+      "value": "Mr. P C MATHEW, S/o K JOSEPH CHACKO",
+      "evidence": "Mr. P C MATHEW, S/o K JOSEPH CHACKO, hereinafter called the party of the first part",
+      "evidence_found": true
+    },
+    "Party Two": {
+      "value": "Mr. L GOPINATH S/o G LAKSHMI NARISIMHAN",
+      "evidence": "Mr. L GOPINATH S/o of G LAKSHMI NARISIMHAN after called the party of the second part",
+      "evidence_found": true
+    }
+  },
+  "warnings": [],
+  "error": null,
+  "attempts": 3,
+  "seconds": 38.4,
+  "prompt_tokens": 2516,
+  "output_tokens": 575,
+  "extraction": {
+    "party_one": {
+      "name": "Mr. P C MATHEW, S/o K JOSEPH CHACKO",
+      "representative": null,
+      "evidence": "Mr. P C MATHEW, S/o K JOSEPH CHACKO, hereinafter called the party of the first part"
+    },
+    "party_two": {
+      "name": "Mr. L GOPINATH S/o G LAKSHMI NARISIMHAN",
+      "representative": null,
+      "evidence": "Mr. L GOPINATH S/o of G LAKSHMI NARISIMHAN after called the party of the second part"
+    },
+    "monthly_rent": {
+      "value": 9000,
+      "evidence": "Rs.9000 (Rupees Nine Thousand Only)"
+    },
+    "security_deposit": {
+      "value": 90000,
+      "evidence": "Rs.90000/-(Rupees Ninety Five thousand only)"
+    },
+    "advance_rent": {
+      "value": null,
+      "evidence": null
+    },
+    "execution_date": {
+      "value": "21.03.2010",
+      "evidence": "RENTAL AGREEMENT THIS DEED OF RENTAL AGREEMENT ENTERED INTO AT CHENNAI ON 21st OF MARCH 2010"
+    },
+    "tenancy_start_date": {
+      "value": "01.04.2010",
+      "evidence": "the party of the second part has agreed and will occupy the premises From 1st April 2010."
+    },
+    "tenancy_end_date": {
+      "value": "30.04.2011",
+      "evidence": "The lease is for a period of 11 months, commencing from this day, 1st of April 2010."
+    },
+    "term_months": null,
+    "termination_notice": {
+      "value": 2,
+      "unit": "months",
+      "evidence": "Two months notice on either side shall be the condition for the lessor and lessee to terminate this lease to voluntarily vacate the premises."
+    },
+    "renewal_notice": {
+      "value": 1,
+      "unit": "months",
+      "evidence": "If the lessee desires to have this lease deed renewed for a further period after the expiry of eleven months, one month advance notice should be given in writing to the lessor for negotiating renewal on terms and conditions to be mutually agreed upon."
+    }
+  }
+}

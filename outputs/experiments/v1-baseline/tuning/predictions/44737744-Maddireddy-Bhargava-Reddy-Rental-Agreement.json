@@ -1,0 +1,20 @@
+{
+  "document_id": "44737744-Maddireddy-Bhargava-Reddy-Rental-Agreement",
+  "status": "failed",
+  "prediction": {
+    "Aggrement Value": null,
+    "Aggrement Start Date": null,
+    "Aggrement End Date": null,
+    "Renewal Notice (Days)": null,
+    "Party One": null,
+    "Party Two": null
+  },
+  "evidence": {},
+  "warnings": [],
+  "error": "gave up after 3 attempts; last error: Model output does not match AgreementExtraction: execution_date.value: Value error, '?.??& day of 2010' is not a valid DD.MM.YYYY calendar date; tenancy_start_date.value: Value error, '11 months' is not a valid DD.MM.YYYY calendar date",
+  "attempts": 3,
+  "seconds": 27.7,
+  "prompt_tokens": 0,
+  "output_tokens": 0,
+  "extraction": null
+}

@@ -1,0 +1,99 @@
+{
+  "document_id": "36199312-Rental-Agreement",
+  "status": "ok",
+  "prediction": {
+    "Aggrement Value": 3800,
+    "Aggrement Start Date": "01.05.2010",
+    "Aggrement End Date": "31.03.2011",
+    "Renewal Notice (Days)": 30,
+    "Party One": "Mr. Balaji.R",
+    "Party Two": "Mr.Kartheek R"
+  },
+  "evidence": {
+    "Aggrement Value": {
+      "value": 3800,
+      "evidence": "The Rent is payable by the Lessees to the Lessor is a sum of Rs.3800/- (Rupees Thirty Eight Thousand Only) on or before 10th of every English Calendar Month.",
+      "evidence_found": true
+    },
+    "Aggrement Start Date": {
+      "value": "01.05.2010",
+      "evidence": "This AGREEMENT of Rent is made in Bangalore and Executed today the lstth of May 2010",
+      "evidence_found": true
+    },
+    "Aggrement End Date": {
+      "value": "31.03.2011",
+      "evidence": "The agreement is in force for a period of eleven (11) months and the same may be renewed by the mutual understanding of both the Lessor and the Lessee.",
+      "evidence_found": false
+    },
+    "Renewal Notice (Days)": {
+      "value": 30,
+      "evidence": "In case of either party wants back the portion or vacates the portion either must be informed within one month prior notice.",
+      "evidence_found": true
+    },
+    "Party One": {
+      "value": "Mr. Balaji.R",
+      "evidence": "1. Mr. Balaji.R Aged about 63 years, No 24 2nd Cross, SBM Colony Mathikere - 560054",
+      "evidence_found": true
+    },
+    "Party Two": {
+      "value": "Mr.Kartheek R",
+      "evidence": "1 Mr.Kartheek R Aged about 31 years, No.81, sri manjunatha nilaya, raju colony, yamalur B angalore-560037.",
+      "evidence_found": true
+    }
+  },
+  "warnings": [
+    "Aggrement End Date: evidence quote not found verbatim in the document"
+  ],
+  "error": null,
+  "attempts": 1,
+  "seconds": 19.0,
+  "prompt_tokens": 2041,
+  "output_tokens": 576,
+  "extraction": {
+    "party_one": {
+      "name": "Mr. Balaji.R",
+      "representative": null,
+      "evidence": "1. Mr. Balaji.R Aged about 63 years, No 24 2nd Cross, SBM Colony Mathikere - 560054"
+    },
+    "party_two": {
+      "name": "Mr.Kartheek R",
+      "representative": null,
+      "evidence": "1 Mr.Kartheek R Aged about 31 years, No.81, sri manjunatha nilaya, raju colony, yamalur B angalore-560037."
+    },
+    "monthly_rent": {
+      "value": 3800,
+      "evidence": "The Rent is payable by the Lessees to the Lessor is a sum of Rs.3800/- (Rupees Thirty Eight Thousand Only) on or before 10th of every English Calendar Month."
+    },
+    "security_deposit": {
+      "value": 40000,
+      "evidence": "The lessor have received a security Deposit amount of Rs.40,000/- (Rupees Fourty Thousand only) from the Lessees and hereby acknowledges the receipt of the same, which carries no interest but to be returned to the lessee at the time of the lessee Vacates and hands over the position."
+    },
+    "advance_rent": {
+      "value": null,
+      "evidence": null
+    },
+    "execution_date": {
+      "value": "01.05.2010",
+      "evidence": "This AGREEMENT of Rent is made in Bangalore and Executed today the lstth of May 2010"
+    },
+    "tenancy_start_date": {
+      "value": null,
+      "evidence": null
+    },
+    "tenancy_end_date": {
+      "value": "31.03.2011",
+      "evidence": "The agreement is in force for a period of eleven (11) months and the same may be renewed by the mutual understanding of both the Lessor and the Lessee."
+    },
+    "term_months": null,
+    "termination_notice": {
+      "value": 1,
+      "unit": "months",
+      "evidence": "In case of either party wants back the portion or vacates the portion either must be informed within one month prior notice."
+    },
+    "renewal_notice": {
+      "value": null,
+      "unit": null,
+      "evidence": null
+    }
+  }
+}

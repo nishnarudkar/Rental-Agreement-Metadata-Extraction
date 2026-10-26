@@ -1,0 +1,97 @@
+{
+  "document_id": "54770958-Rental-Agreement",
+  "status": "ok",
+  "prediction": {
+    "Aggrement Value": 5500,
+    "Aggrement Start Date": "20.04.2011",
+    "Aggrement End Date": "21.05.2012",
+    "Renewal Notice (Days)": 60,
+    "Party One": "ASHARAMESH SADASIVUNI DEEPTI",
+    "Party Two": "SADASHIVUNI DEEPTI & SADASHIVUNI KIRAN"
+  },
+  "evidence": {
+    "Aggrement Value": {
+      "value": 5500,
+      "evidence": "Rs.5500/-(Five thousand five hundred only}",
+      "evidence_found": true
+    },
+    "Aggrement Start Date": {
+      "value": "20.04.2011",
+      "evidence": "The rent agreem ent shall be in force for a period of 11 (months) from the date of Tenancy.",
+      "evidence_found": true
+    },
+    "Aggrement End Date": {
+      "value": "21.05.2012",
+      "evidence": "The rent agreem ent shall be in force for a period of 11 (months) from the date of Tenancy.",
+      "evidence_found": true
+    },
+    "Renewal Notice (Days)": {
+      "value": 60,
+      "evidence": "It is hereby agreed that 2{Two} months' notice is required on either side for the termination of this Rental Agreement",
+      "evidence_found": true
+    },
+    "Party One": {
+      "value": "ASHARAMESH SADASIVUNI DEEPTI",
+      "evidence": "RAMESH.K.N SADASHIVUNI KIRAN",
+      "evidence_found": true
+    },
+    "Party Two": {
+      "value": "SADASHIVUNI DEEPTI & SADASHIVUNI KIRAN",
+      "evidence": "Mrs.Sadasivuni Deepti & Mr.Sadasivuni Kiran",
+      "evidence_found": true
+    }
+  },
+  "warnings": [],
+  "error": null,
+  "attempts": 1,
+  "seconds": 11.3,
+  "prompt_tokens": 2302,
+  "output_tokens": 488,
+  "extraction": {
+    "party_one": {
+      "name": "ASHARAMESH SADASIVUNI DEEPTI",
+      "representative": "RAMESH.K.N",
+      "evidence": "RAMESH.K.N SADASHIVUNI KIRAN"
+    },
+    "party_two": {
+      "name": "SADASHIVUNI DEEPTI & SADASHIVUNI KIRAN",
+      "representative": null,
+      "evidence": "Mrs.Sadasivuni Deepti & Mr.Sadasivuni Kiran"
+    },
+    "monthly_rent": {
+      "value": 5500,
+      "evidence": "Rs.5500/-(Five thousand five hundred only}"
+    },
+    "security_deposit": {
+      "value": 55000,
+      "evidence": "Rs. 55,000/-(Rs. Fifty five thousand only)"
+    },
+    "advance_rent": {
+      "value": null,
+      "evidence": null
+    },
+    "execution_date": {
+      "value": "20.04.2011",
+      "evidence": "This RENTAL AGREEMENT is made & executed on 20 April 2011"
+    },
+    "tenancy_start_date": {
+      "value": "20.04.2011",
+      "evidence": "The rent agreem ent shall be in force for a period of 11 (months) from the date of Tenancy."
+    },
+    "tenancy_end_date": {
+      "value": "21.05.2012",
+      "evidence": "The rent agreem ent shall be in force for a period of 11 (months) from the date of Tenancy."
+    },
+    "term_months": 11,
+    "termination_notice": {
+      "value": 2,
+      "unit": "months",
+      "evidence": "It is hereby agreed that 2{Two} months' notice is required on either side for the termination of this Rental Agreement"
+    },
+    "renewal_notice": {
+      "value": null,
+      "unit": null,
+      "evidence": null
+    }
+  }
+}
