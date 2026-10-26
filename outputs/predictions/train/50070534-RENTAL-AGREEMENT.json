@@ -1,0 +1,105 @@
+{
+  "document_id": "50070534-RENTAL-AGREEMENT",
+  "status": "ok",
+  "prediction": {
+    "Aggrement Value": 10000,
+    "Aggrement Start Date": "01.04.2010",
+    "Aggrement End Date": "30.03.2011",
+    "Renewal Notice (Days)": 90,
+    "Party One": "P. JohnsonRavikumar",
+    "Party Two": "Saravanan BV"
+  },
+  "evidence": {
+    "Aggrement Value": {
+      "value": 10000,
+      "evidence": "The monthly rent, water maintenance charges for the said shall be Rs. 10,000/- (Rupees Ten Thousand only)",
+      "evidence_found": true
+    },
+    "Aggrement Start Date": {
+      "value": "01.04.2010",
+      "evidence": "The agreement shall be for a period of 11 months beginning form 01.04.2010",
+      "evidence_found": true
+    },
+    "Aggrement End Date": {
+      "value": "30.03.2011",
+      "evidence": "and ending with 30.03.2011.",
+      "evidence_found": true
+    },
+    "Renewal Notice (Days)": {
+      "value": 90,
+      "evidence": "The House Owner and Tenant hereby agree that three months advance notice in writing is essential for the tenant for vacating the premises if he chooses to terminate this agreement during the validity period.",
+      "evidence_found": true
+    },
+    "Party One": {
+      "value": "P. JohnsonRavikumar",
+      "evidence": "Mr. P. JohnsonRavikumar, aged about 43 Years, residing at Plot. No: 10, Door No:3, Jeevanantham Street, Lakshmipuram Tiruvanmiyur, Chennai - 600 041.",
+      "evidence_found": true
+    },
+    "Party Two": {
+      "value": "Saravanan BV",
+      "evidence": "Mr. Saravanan BV aged about 27 years, residing at Plot. No: 10, Door No:3, Jeevanantham Street, Lakshmipuram Tiruvanmiyur, Chennai - 600 041.",
+      "evidence_found": true
+    }
+  },
+  "warnings": [],
+  "verification": null,
+  "error": null,
+  "attempts": 1,
+  "seconds": 14.6,
+  "prompt_tokens": 2454,
+  "output_tokens": 683,
+  "extraction": {
+    "party_one": {
+      "title": "Mr.",
+      "name": "P. JohnsonRavikumar",
+      "relation": null,
+      "representative": null,
+      "evidence": "Mr. P. JohnsonRavikumar, aged about 43 Years, residing at Plot. No: 10, Door No:3, Jeevanantham Street, Lakshmipuram Tiruvanmiyur, Chennai - 600 041."
+    },
+    "party_two": {
+      "title": "Mr.",
+      "name": "Saravanan BV",
+      "relation": null,
+      "representative": null,
+      "evidence": "Mr. Saravanan BV aged about 27 years, residing at Plot. No: 10, Door No:3, Jeevanantham Street, Lakshmipuram Tiruvanmiyur, Chennai - 600 041."
+    },
+    "monthly_rent": {
+      "value": 10000,
+      "evidence": "The monthly rent, water maintenance charges for the said shall be Rs. 10,000/- (Rupees Ten Thousand only)"
+    },
+    "security_deposit": {
+      "value": null,
+      "evidence": null
+    },
+    "advance_rent": {
+      "value": 50000,
+      "evidence": "The tenant has paid the sum of Rs.50, 000/- (Rupees Fifty thousand only) by cash without any interest, and the House Owner has to re-pay the money while the Tenant vacating the house."
+    },
+    "execution_date": {
+      "value": "14.07.2010",
+      "evidence": "THIS RENTAL AGREEMENT is executed at Chennai - 600 041 on 14th day of July 2010"
+    },
+    "tenancy_start_date": {
+      "value": "01.04.2010",
+      "evidence": "The agreement shall be for a period of 11 months beginning form 01.04.2010"
+    },
+    "tenancy_end_date": {
+      "value": "30.03.2011",
+      "evidence": "and ending with 30.03.2011."
+    },
+    "term": {
+      "months": 11,
+      "evidence": "The agreement shall be for a period of 11 months beginning form 01.04.2010 and ending with 30.03.2011."
+    },
+    "termination_notice": {
+      "value": 3,
+      "unit": "months",
+      "evidence": "The House Owner and Tenant hereby agree that three months advance notice in writing is essential for the tenant for vacating the premises if he chooses to terminate this agreement during the validity period."
+    },
+    "renewal_notice": {
+      "value": null,
+      "unit": null,
+      "evidence": null
+    }
+  }
+}

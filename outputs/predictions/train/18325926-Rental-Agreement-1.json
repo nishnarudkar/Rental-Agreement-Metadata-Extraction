@@ -1,0 +1,107 @@
+{
+  "document_id": "18325926-Rental-Agreement-1",
+  "status": "ok",
+  "prediction": {
+    "Aggrement Value": 4000,
+    "Aggrement Start Date": "05.12.2008",
+    "Aggrement End Date": "04.11.2009",
+    "Renewal Notice (Days)": 90,
+    "Party One": "K.Kuttan S/o Kelu Aehari (Late)",
+    "Party Two": "Sri. P.M. Narayana Namboodri “Laxmi Leela”"
+  },
+  "evidence": {
+    "Aggrement Value": {
+      "value": 4000,
+      "evidence": "the tenant is the Proprietor of the business and he has agreed to pay rent Rs.4,000.00 (Rupees Four Thousand only) for above said premises",
+      "evidence_found": false
+    },
+    "Aggrement Start Date": {
+      "value": "05.12.2008",
+      "evidence": "The agreement made only for eleven months from this date of agreement.",
+      "evidence_found": true
+    },
+    "Aggrement End Date": {
+      "value": "04.11.2009",
+      "evidence": "The agreement made only for eleven months from this date of agreement.",
+      "evidence_found": true
+    },
+    "Renewal Notice (Days)": {
+      "value": 90,
+      "evidence": "Each party shall be liable to give three month advance notice for the termination of this agreement.",
+      "evidence_found": true
+    },
+    "Party One": {
+      "value": "K.Kuttan S/o Kelu Aehari (Late)",
+      "evidence": "MR.K.Kuttan S/o Kelu Aehari (Late) residing at site No 152 Geethalayam OMH colong S.M. Road 1st main, T.Dasarahalli, Bangalore-57.",
+      "evidence_found": true
+    },
+    "Party Two": {
+      "value": "Sri. P.M. Narayana Namboodri “Laxmi Leela”",
+      "evidence": "Sri. P.M. Narayana Namboodri “Laxmi Leela” ground floor 3rd cross Ayyappa Nagar behind Ayyappa Temple, Jalahalli West, Bangalore - 15",
+      "evidence_found": true
+    }
+  },
+  "warnings": [
+    "Aggrement Value: evidence quote not found verbatim in the document"
+  ],
+  "verification": null,
+  "error": null,
+  "attempts": 1,
+  "seconds": 13.0,
+  "prompt_tokens": 2529,
+  "output_tokens": 587,
+  "extraction": {
+    "party_one": {
+      "title": "MR.",
+      "name": "K.Kuttan S/o Kelu Aehari (Late)",
+      "relation": null,
+      "representative": null,
+      "evidence": "MR.K.Kuttan S/o Kelu Aehari (Late) residing at site No 152 Geethalayam OMH colong S.M. Road 1st main, T.Dasarahalli, Bangalore-57."
+    },
+    "party_two": {
+      "title": null,
+      "name": "Sri. P.M. Narayana Namboodri “Laxmi Leela”",
+      "relation": null,
+      "representative": null,
+      "evidence": "Sri. P.M. Narayana Namboodri “Laxmi Leela” ground floor 3rd cross Ayyappa Nagar behind Ayyappa Temple, Jalahalli West, Bangalore - 15"
+    },
+    "monthly_rent": {
+      "value": 4000,
+      "evidence": "the tenant is the Proprietor of the business and he has agreed to pay rent Rs.4,000.00 (Rupees Four Thousand only) for above said premises"
+    },
+    "security_deposit": {
+      "value": null,
+      "evidence": null
+    },
+    "advance_rent": {
+      "value": 35000,
+      "evidence": "An advance amount of Rs.35,000/- (Rupees thirty five thousand only) is paid by the tenant to the owner at the time of commencement of this agreement"
+    },
+    "execution_date": {
+      "value": "05.12.2008",
+      "evidence": "This deed of rental agreement executed at Bangalore this fifth day of December 2008"
+    },
+    "tenancy_start_date": {
+      "value": "05.12.2008",
+      "evidence": "The agreement made only for eleven months from this date of agreement."
+    },
+    "tenancy_end_date": {
+      "value": null,
+      "evidence": null
+    },
+    "term": {
+      "months": 11,
+      "evidence": "The agreement made only for eleven months from this date of agreement."
+    },
+    "termination_notice": {
+      "value": 3,
+      "unit": "months",
+      "evidence": "Each party shall be liable to give three month advance notice for the termination of this agreement."
+    },
+    "renewal_notice": {
+      "value": null,
+      "unit": null,
+      "evidence": null
+    }
+  }
+}

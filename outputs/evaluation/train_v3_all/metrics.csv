@@ -1,0 +1,7 @@
+field,denominator,raw_true,raw_recall,normalized_true,normalized_recall,not_extracted,blank_reference,unattainable_reference
+Aggrement Value,9,6,0.6667,6,0.6667,0,0,0
+Aggrement Start Date,9,5,0.5556,6,0.6667,0,0,0
+Aggrement End Date,9,3,0.3333,3,0.3333,0,0,3
+Renewal Notice (Days),8,5,0.625,5,0.625,0,1,0
+Party One,9,1,0.1111,4,0.4444,0,0,0
+Party Two,9,1,0.1111,2,0.2222,0,0,0

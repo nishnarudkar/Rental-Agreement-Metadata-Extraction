@@ -1,0 +1,80 @@
+{
+  "documents_scored": 9,
+  "documents_without_prediction": [],
+  "predictions_without_label": [],
+  "excluded": {
+    "24158401-Rental-Agreement": "document file is not in train/"
+  },
+  "fields": {
+    "Aggrement Value": {
+      "denominator": 9,
+      "raw_true": 6,
+      "raw_recall": 0.6667,
+      "normalized_true": 6,
+      "normalized_recall": 0.6667,
+      "not_extracted": 0,
+      "blank_reference": 0,
+      "unattainable_reference": 0,
+      "definition": "9 documents with a non-blank reference for 'Aggrement Value'; 0 blank reference(s) excluded"
+    },
+    "Aggrement Start Date": {
+      "denominator": 9,
+      "raw_true": 5,
+      "raw_recall": 0.5556,
+      "normalized_true": 6,
+      "normalized_recall": 0.6667,
+      "not_extracted": 0,
+      "blank_reference": 0,
+      "unattainable_reference": 0,
+      "definition": "9 documents with a non-blank reference for 'Aggrement Start Date'; 0 blank reference(s) excluded"
+    },
+    "Aggrement End Date": {
+      "denominator": 9,
+      "raw_true": 3,
+      "raw_recall": 0.3333,
+      "normalized_true": 3,
+      "normalized_recall": 0.3333,
+      "not_extracted": 0,
+      "blank_reference": 0,
+      "unattainable_reference": 3,
+      "definition": "9 documents with a non-blank reference for 'Aggrement End Date'; 0 blank reference(s) excluded"
+    },
+    "Renewal Notice (Days)": {
+      "denominator": 8,
+      "raw_true": 5,
+      "raw_recall": 0.625,
+      "normalized_true": 5,
+      "normalized_recall": 0.625,
+      "not_extracted": 0,
+      "blank_reference": 1,
+      "unattainable_reference": 0,
+      "definition": "8 documents with a non-blank reference for 'Renewal Notice (Days)'; 1 blank reference(s) excluded"
+    },
+    "Party One": {
+      "denominator": 9,
+      "raw_true": 1,
+      "raw_recall": 0.1111,
+      "normalized_true": 4,
+      "normalized_recall": 0.4444,
+      "not_extracted": 0,
+      "blank_reference": 0,
+      "unattainable_reference": 0,
+      "definition": "9 documents with a non-blank reference for 'Party One'; 0 blank reference(s) excluded"
+    },
+    "Party Two": {
+      "denominator": 9,
+      "raw_true": 1,
+      "raw_recall": 0.1111,
+      "normalized_true": 2,
+      "normalized_recall": 0.2222,
+      "not_extracted": 0,
+      "blank_reference": 0,
+      "unattainable_reference": 0,
+      "definition": "9 documents with a non-blank reference for 'Party Two'; 0 blank reference(s) excluded"
+    }
+  },
+  "macro_raw_recall": 0.4005,
+  "macro_normalized_recall": 0.493,
+  "micro_raw_recall": 0.3962,
+  "micro_normalized_recall": 0.4906
+}
