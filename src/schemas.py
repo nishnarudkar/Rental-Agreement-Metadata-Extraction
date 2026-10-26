@@ -20,7 +20,8 @@ malformed values, such as impossible calendar dates, instead of guessing.
 The evaluation-only normalisation lives separately in ``src/normalize.py``.
 """
 
-from datetime import datetime
+import calendar
+from datetime import date, datetime, timedelta
 from typing import Annotated, Literal
 
 from pydantic import AfterValidator, BaseModel, BeforeValidator, ConfigDict, Field, model_validator
@@ -65,10 +66,12 @@ class _Strict(BaseModel):
 
 
 class Party(_Strict):
+    title: Text = Field(description="Courtesy title written before the name (Mr., Mrs., Ms., Dr., Prof., Sri, Smt.), or null.")
     name: Text = Field(
-        description="Legal name of the contracting party exactly as written (a company name if the "
-        "party is a company). Exclude addresses, ages and relations such as S/o."
+        description="Name of the contracting party without title, relation, age or address (a company name "
+        "if the party is a company). Keep initials and spelling as written."
     )
+    relation: Text = Field(description="Relation written after the name, e.g. 'S/o K. Joseph', or null.")
     representative: Text = Field(
         description="Person signing or acting for the party (e.g. a company director or power-of-attorney "
         "holder), if different from the party itself; otherwise null."
@@ -102,6 +105,24 @@ class NoticePeriod(_Strict):
         return None if self.value is None else self.value * DAYS_PER_UNIT[self.unit]
 
 
+class Term(_Strict):
+    months: int | None = Field(gt=0, description="Length of the tenancy in months, e.g. 11 for 'eleven months'.")
+    evidence: Text = Field(description=EVIDENCE)
+
+
+def add_months(day: date, months: int) -> date:
+    """Calendar month arithmetic; the day is clamped to the target month's length."""
+    years, month_index = divmod(day.month - 1 + months, 12)
+    year, month = day.year + years, month_index + 1
+    return date(year, month, min(day.day, calendar.monthrange(year, month)[1]))
+
+
+def term_end_date(start: str, months: int) -> str:
+    """Last day of a term of ``months`` beginning on ``start`` (DD.MM.YYYY)."""
+    begin = datetime.strptime(start, DATE_FORMAT).date()
+    return (add_months(begin, months) - timedelta(days=1)).strftime(DATE_FORMAT)
+
+
 class AgreementExtraction(_Strict):
     """Everything the model reads from one agreement, with evidence."""
 
@@ -114,11 +135,8 @@ class AgreementExtraction(_Strict):
     tenancy_start_date: DateValue = Field(
         description="Date the tenancy or lease period begins (commencement), if stated."
     )
-    tenancy_end_date: DateValue = Field(
-        description="Date the tenancy ends: stated directly, or the last day of the stated term "
-        "counted from the start date."
-    )
-    term_months: int | None = Field(gt=0, description="Length of the tenancy in months, if stated.")
+    tenancy_end_date: DateValue = Field(description="Date the tenancy ends (see the instructions).")
+    term: Term = Field(description="Length of the tenancy, if stated.")
     termination_notice: NoticePeriod = Field(
         description="Notice either party must give to terminate the agreement or vacate the premises."
     )
@@ -127,12 +145,19 @@ class AgreementExtraction(_Strict):
         "notice clause exists."
     )
 
-    def submission_sources(self) -> dict[str, "Party | Amount | DateValue | NoticePeriod"]:
-        """Which extracted field feeds each submission column (definitions: docs/schema.md)."""
+    def submission_sources(self, derive_end_date: bool = False) -> dict[str, "Party | Amount | DateValue | NoticePeriod"]:
+        """Which extracted field feeds each submission column (definitions: docs/schema.md).
+
+        With ``derive_end_date``, a missing end date is computed in code as the
+        last day of the stated term from the start date; its evidence is the
+        term's quote.
+        """
         start = self.tenancy_start_date if self.tenancy_start_date.value else self.execution_date
         notice = self.termination_notice if self.termination_notice.value is not None else self.renewal_notice
-        return dict(zip(LABEL_COLUMNS, [self.monthly_rent, start, self.tenancy_end_date, notice,
-                                        self.party_one, self.party_two]))
+        end = self.tenancy_end_date
+        if derive_end_date and end.value is None and start.value and self.term.months:
+            end = DateValue(value=term_end_date(start.value, self.term.months), evidence=self.term.evidence)
+        return dict(zip(LABEL_COLUMNS, [self.monthly_rent, start, end, notice, self.party_one, self.party_two]))
 
 
 # --------------------------------------------------------------------------- submission record
@@ -151,9 +176,9 @@ class AgreementMetadata(BaseModel):
     party_two: Text = Field(default=None, alias=LABEL_COLUMNS[5])
 
     @classmethod
-    def from_extraction(cls, x: AgreementExtraction) -> "AgreementMetadata":
+    def from_extraction(cls, x: AgreementExtraction, derive_end_date: bool = False) -> "AgreementMetadata":
         """Map the detailed extraction to the six fields (definitions: docs/schema.md)."""
-        rent, start, end, notice, one, two = x.submission_sources().values()
+        rent, start, end, notice, one, two = x.submission_sources(derive_end_date).values()
         return cls(
             agreement_value=rent.value,
             agreement_start_date=start.value,

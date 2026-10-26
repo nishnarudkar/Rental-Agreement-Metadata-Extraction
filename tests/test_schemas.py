@@ -14,15 +14,15 @@ NULL_NOTICE = {"value": None, "unit": None, "evidence": None}
 def _extraction(**overrides) -> dict:
     """A complete, synthetic model answer (fictional parties)."""
     data = {
-        "party_one": {"name": "Ms. Ananya Rao", "representative": None, "evidence": "between Ms. Ananya Rao (the Owner)"},
-        "party_two": {"name": "Mr. Kabir Mehta", "representative": None, "evidence": "and Mr. Kabir Mehta (the Tenant)"},
+        "party_one": {"title": None, "name": "Ms. Ananya Rao", "relation": None, "representative": None, "evidence": "between Ms. Ananya Rao (the Owner)"},
+        "party_two": {"title": None, "name": "Mr. Kabir Mehta", "relation": None, "representative": None, "evidence": "and Mr. Kabir Mehta (the Tenant)"},
         "monthly_rent": {"value": 18500, "evidence": "monthly rent of Rs. 18,500/-"},
         "security_deposit": {"value": 100000, "evidence": "security deposit of Rs. 1,00,000/-"},
         "advance_rent": NULL_AMOUNT,
         "execution_date": {"value": "03.01.2024", "evidence": "made at Pune on 3rd January 2024"},
         "tenancy_start_date": {"value": "15.01.2024", "evidence": "commencing 15th January 2024"},
         "tenancy_end_date": {"value": "14.12.2024", "evidence": "ending 14th December 2024"},
-        "term_months": 11,
+        "term": {"months": 11, "evidence": "for eleven months"},
         "termination_notice": {"value": 1, "unit": "months", "evidence": "one month's written notice"},
         "renewal_notice": NULL_NOTICE,
     }
@@ -50,7 +50,7 @@ def test_dates_are_zero_padded():
 
 
 def test_blank_strings_mean_missing_and_whitespace_is_collapsed():
-    party = Party(name="  ", representative="", evidence="  between   A  and B ")
+    party = Party(title=" ", name="  ", relation=None, representative="", evidence="  between   A  and B ")
     assert (party.name, party.representative, party.evidence) == (None, None, "between A and B")
 
 
@@ -136,7 +136,7 @@ def test_renewal_notice_used_when_no_termination_notice():
 
 
 def test_company_party_keeps_company_name_not_representative():
-    company = {"name": "Acme Dairy Products Pvt Ltd", "representative": "Mr. R. Sharma, Director", "evidence": "x"}
+    company = {"title": None, "name": "Acme Dairy Products Pvt Ltd", "relation": None, "representative": "Mr. R. Sharma, Director", "evidence": "x"}
     x = AgreementExtraction.model_validate(_extraction(party_two=company))
     assert AgreementMetadata.from_extraction(x).party_two == "Acme Dairy Products Pvt Ltd"
 

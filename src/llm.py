@@ -34,6 +34,11 @@ class LLMError(RuntimeError):
 class LLMOutputError(LLMError):
     """The answer was malformed or cut off; asking again may succeed."""
 
+    def __init__(self, message: str, raw: str | None = None, errors: list | None = None):
+        super().__init__(message)
+        self.raw = raw  # the rejected answer, if any
+        self.errors = errors or []  # Pydantic error dicts (with "loc")
+
 
 class LLMInputTooLongError(LLMError):
     """The prompt does not fit the context window; retrying cannot help."""
@@ -120,7 +125,9 @@ class LocalLLM:
             problems = "; ".join(
                 f"{'.'.join(str(p) for p in e['loc']) or 'answer'}: {e['msg']}" for e in exc.errors()[:5]
             )
-            raise LLMOutputError(f"Model output does not match {schema.__name__}: {problems}") from exc
+            raise LLMOutputError(
+                f"Model output does not match {schema.__name__}: {problems}", raw=raw, errors=exc.errors()
+            ) from exc
 
         eval_seconds = (response.eval_duration or 0) / 1e9
         return LLMResult(
