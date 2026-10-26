@@ -29,7 +29,7 @@ this single run (`docs/test_results.md`):
 | Renewal Notice (Days) | **1.00** | 1.00 |
 | Party One | **0.00** | 0.75 |
 | Party Two | **0.00** | 0.25 |
-| **Macro average** | **0.62** | **0.79** |
+| **Macro average** | **0.625** | **0.792** |
 
 \* *Normalised* ignores formatting only (spaces, `6,500` vs `6500`, `1.4.2010` vs `01.04.2010`,
 case, punctuation, titles such as "Mr."). The **raw** column is the assignment metric
@@ -51,16 +51,40 @@ No document failed and no OCR error affected a field.
 | 24158401-Rental-Agreement | 12000 | 01.04.2008 | 31.03.2009 | 60 | Hanumaiah | Vishal Bhardwaj S/O Charnel Singh |
 | 95980236-Rental-Agreement | 9000 | 01.04.2010 | 28.02.2011 | 30 | S.Sakunthala | V.V.Ravi Kian, S/o V.R.G.Sastry |
 
-### Training results (development only)
+### Per-field recall on the training set
+
+Same frozen configuration (v3), on the 9 usable training documents. The `train.csv` row for
+`24158401` is excluded because that file is a test document. These predictions come from the
+development runs: 7 tuning documents, used to choose the configuration (so slightly
+optimistic), and 2 held-out documents. Reports: `outputs/evaluation/train_v3_all/` and
+`outputs/evaluation/train_v3_clean/`.
+
+| Field | All 9 docs: raw | normalised | Without the swapped-label pair (7): raw | normalised |
+|---|---|---|---|---|
+| Aggrement Value | 0.667 (6/9) | 0.667 | 0.857 (6/7) | 0.857 |
+| Aggrement Start Date | 0.556 (5/9) | 0.667 | 0.714 (5/7) | 0.857 |
+| Aggrement End Date | 0.333 (3/9)† | 0.333 | 0.429 (3/7)† | 0.429 |
+| Renewal Notice (Days) | 0.625 (5/8)‡ | 0.625 | 0.833 (5/6)‡ | 0.833 |
+| Party One | 0.111 (1/9) | 0.444 | 0.143 (1/7) | 0.571 |
+| Party Two | 0.111 (1/9) | 0.222 | 0.143 (1/7) | 0.286 |
+| **Macro average** | **0.401** | **0.493** | **0.520** | **0.639** |
+
+† 3 reference end dates do not exist on the calendar (`31.11.2009`, `31.04.2011`, `31.02.2011`),
+so at most 6/9 (4/7) can match exactly. ‡ One reference is blank, so the denominator is 8 (6).
+The two rows whose labels are swapped (`54770958`, `54945838`) cannot match whatever the system
+outputs; the second view leaves them out and says so.
+
+### Summary across sets
 
 | Set | Docs | Macro raw | Macro normalised |
 |---|---|---|---|
-| Train, tuning (clean) | 5 | 0.53 | 0.59 |
-| Train, holdout | 2 | 0.50 | 0.75 |
-| **Test** | 4 | **0.62** | **0.79** |
+| Train, all usable | 9 | 0.401 | 0.493 |
+| Train, without swapped labels | 7 | 0.520 | 0.639 |
+| Train, holdout only | 2 | 0.500 | 0.750 |
+| **Test** | 4 | **0.625** | **0.792** |
 
 The dataset is tiny (9 usable training documents, 4 test documents): one cell moves a
-field's recall by 20–25 points. The test score is higher mainly because the test labels are
+field's recall by 11–25 points. The test score is higher mainly because the test labels are
 cleaner, not because the system generalises better. See `docs/experiments.md`.
 
 ## How it works
@@ -99,6 +123,35 @@ cleaner, not because the system generalises better. See `docs/experiments.md`.
 
 Why local: the agreements contain personal data. Everything runs on the machine, with no paid
 API and no upload.
+
+## Is this rule-based?
+
+No. The assignment asks for no rule-based approach (regex, static conditions). This is how
+each part of the system relates to that requirement:
+
+| Step | Who does it | Any regex or static condition on the document text? |
+|---|---|---|
+| Reading DOCX / OCR on PNG | `python-docx` XML walk / PaddleOCR (a deep-learning model) | No. They turn the document into text and look for no fields. |
+| **Finding all six fields in the text** | **The LLM**, from field *definitions* (e.g. "the recurring rent per month, never the deposit") | **No.** There are no keyword lists, patterns, positions or per-template rules. The same prompt is used for every document, and a test checks that it contains no file name, party name or amount from the dataset. |
+| Validating the answer | Pydantic | No. It only checks the *answer's* format (a real calendar date, a whole number). An invalid answer is sent back to the LLM with the error; nothing is repaired by hand. |
+| Turning the model's answer into the six CSV columns | Small, documented post-processing **of values the LLM already extracted** | Never reads the document. Details below. |
+| Evaluation normalisation | `src/normalize.py` | Used only to report the secondary "normalised" score, never to produce predictions. |
+
+The post-processing in `AgreementExtraction.submission_sources()` (`src/schemas.py`) consists of:
+
+1. **Units** – the model reports a notice period as written ("2", "months"); code converts it to
+   days (×30, ×7) because the column is in days. This is unit conversion, not extraction.
+2. **Calendar arithmetic** – when the agreement states a term but no end date, the model
+   reports the start date and the term (each with its evidence quote), and code computes the last
+   day of the term. In configs v1 and v2 the model did this arithmetic itself, and in the baseline
+   it got 3 of 5 wrong (e.g. `30.04.2011` for 1 April 2010 + 11 months). Doing it in code fixed every
+   case (`docs/experiments.md`).
+3. **Choosing between two extracted values** – the model extracts the execution date and the
+   tenancy start date separately, and the termination notice and the renewal notice separately.
+   The CSV column takes the tenancy start date (or the execution date if no separate start is
+   stated), and the termination notice (or the renewal notice if there is no termination
+   clause). These choices follow what the training labels mean (`docs/schema.md`). They pick
+   between the model's own outputs and never look at the document.
 
 ## Installation (Windows 10/11, PowerShell)
 
@@ -154,10 +207,13 @@ without the model. To also run one end-to-end smoke test against the real local 
 
 ## Usage
 
-**Predict any folder of agreements** (writes a CSV with the dataset's columns):
+**Predict a folder of agreements, or a single DOCX / PNG file** (writes a CSV with the dataset's columns):
 
 ```bash
 python -m src.predict --input data/test --output outputs/predictions.csv
+```
+```bash
+python -m src.predict --input data/test/24158401-Rental-Agreement.png --output outputs/one_prediction.csv
 ```
 
 - Per-document evidence, warnings and errors go to `outputs/extracted_text/<folder>/`.
@@ -264,7 +320,7 @@ the original files left untouched:
 │   ├── extractor.py           prompts, retries, salvage, evidence check
 │   ├── normalize.py           evaluation-only normalisation
 │   ├── evaluate.py            per-field recall, reports
-│   ├── predict.py             CLI: folder → predictions CSV
+│   ├── predict.py             CLI: file or folder → predictions CSV
 │   ├── final_evaluation.py    one-shot frozen test evaluation
 │   ├── experiment.py          development experiments with log
 │   ├── freeze.py              frozen-configuration fingerprint

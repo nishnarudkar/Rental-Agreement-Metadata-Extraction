@@ -35,7 +35,7 @@ CPU load on the machine is the likely cause.
 | Renewal Notice (Days) | 4 | **1.00** | 1.00 |
 | Party One | 4 | **0.00** | 0.75 |
 | Party Two | 4 | **0.00** | 0.25 |
-| **Macro average** | | **0.62** | **0.79** |
+| **Macro average** | | **0.625** | **0.792** |
 | Micro average (24 cells) | | 0.625 | 0.792 |
 
 **Missing values:** no test reference cell is blank, so every denominator is 4. No prediction
@@ -68,7 +68,7 @@ Predictions (`outputs/predictions.csv`):
 | Train tuning, all | 7 | 0.37 | 0.42 | includes 2 swapped-label rows and impossible reference dates |
 | Train tuning, clean | 5 | 0.53 | 0.59 | used for selection; slightly optimistic for that reason |
 | Train holdout | 2 | 0.50 | 0.75 | scored once before freezing |
-| **Test** | **4** | **0.62** | **0.79** | scored once after freezing |
+| **Test** | **4** | **0.625** | **0.792** | scored once after freezing |
 
 The test score is higher than the training scores mainly because the test labels are cleaner:
 no swapped rows and no impossible dates. With 4 documents (24 cells), one cell changes the
