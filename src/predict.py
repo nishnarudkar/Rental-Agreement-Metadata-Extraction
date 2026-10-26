@@ -1,15 +1,18 @@
-"""Predict the six metadata fields for every agreement in a folder.
+"""Predict the six metadata fields for one agreement or a folder of agreements.
 
     python -m src.predict --input data/test --output outputs/predictions.csv
+    python -m src.predict --input data/test/24158401-Rental-Agreement.png --output outputs/one.csv
 
-Reads every .docx / .png in ``--input`` (other files are reported), extracts
+Reads ``--input`` (a .docx / .png file, or every such file in a folder; other
+files are reported), extracts
 text (DOCX reader or OCR), runs the frozen AI extractor, and writes a CSV with
 the same columns as the dataset's label files ("File Name" + six fields). A
 field the system cannot support from the document is left empty.
 
 Per-document details (evidence quotes, warnings, errors) are written next to
-the extracted text in ``--work-dir`` (default: outputs/extracted_text/<input
-folder name>); extracted text found there is reused, so OCR runs only once.
+the extracted text in ``--work-dir`` (default: outputs/extracted_text/<folder
+name>, using the file's folder for a single file); extracted text found there
+is reused, so OCR runs only once.
 The command exits with status 1 if any document failed.
 
 No labels are read: this works on any folder of agreements.
@@ -30,16 +33,18 @@ from src.extractor import DEFAULT_CONFIG, FINAL_CONFIG_NAME, ExtractionResult, e
 from src.llm import LocalLLM
 
 
-def predict_folder(input_dir: Path, output_csv: Path, work_dir: Path, llm: LocalLLM | None = None,
+def predict_folder(input_path: Path, output_csv: Path, work_dir: Path, llm: LocalLLM | None = None,
                    force: bool = False) -> dict[str, ExtractionResult]:
-    """Run ingestion + extraction on ``input_dir`` and write ``output_csv``."""
-    summary = extract_folder(input_dir, work_dir, force=force)
-    print_summary(input_dir.name, summary)
+    """Run ingestion + extraction on a folder or a single file and write ``output_csv``."""
+    folder, files = (input_path.parent, [input_path]) if input_path.is_file() else (input_path, None)
+    summary = extract_folder(folder, work_dir, force=force, files=files)
+    print_summary(input_path.name, summary)
 
     llm = llm or LocalLLM()
     llm.check()
     results: dict[str, ExtractionResult] = {}
-    documents = sorted(p for p in input_dir.iterdir() if p.is_file() and p.suffix.lower() in READERS)
+    candidates = files if files is not None else [p for p in folder.iterdir() if p.is_file()]
+    documents = sorted(p for p in candidates if p.suffix.lower() in READERS)
     for path in documents:
         doc_id = document_id(path)
         text_path = work_dir / f"{doc_id}.txt"
@@ -64,15 +69,19 @@ def predict_folder(input_dir: Path, output_csv: Path, work_dir: Path, llm: Local
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--input", type=Path, required=True, help="folder containing .docx / .png agreements")
+    parser.add_argument("--input", type=Path, required=True,
+                        help="a .docx / .png agreement, or a folder of them")
     parser.add_argument("--output", type=Path, required=True, help="predictions CSV to write")
     parser.add_argument("--work-dir", type=Path, help="where extracted text and per-document JSON go")
     parser.add_argument("--force", action="store_true", help="re-extract text even if cached")
     args = parser.parse_args()
-    if not args.input.is_dir():
-        parser.error(f"input folder not found: {args.input}")
+    if not args.input.exists():
+        parser.error(f"input not found: {args.input}")
+    if args.input.is_file() and args.input.suffix.lower() not in READERS:
+        parser.error(f"unsupported file type '{args.input.suffix}' (expected .docx or .png)")
 
-    work_dir = args.work_dir or EXTRACTED_TEXT_DIR / args.input.name
+    folder = args.input.parent if args.input.is_file() else args.input
+    work_dir = args.work_dir or EXTRACTED_TEXT_DIR / folder.name
     work_dir.mkdir(parents=True, exist_ok=True)
     logging.basicConfig(level=logging.WARNING, format="%(levelname)s %(name)s: %(message)s",
                         handlers=[logging.FileHandler(work_dir / "predict.log", encoding="utf-8")])

@@ -71,8 +71,8 @@ def _process(path: Path, out_dir: Path) -> dict:
     }
 
 
-def extract_folder(folder: Path, out_dir: Path, force: bool = False) -> dict:
-    """Process every file in ``folder``; return a run summary.
+def extract_folder(folder: Path, out_dir: Path, force: bool = False, files: list[Path] | None = None) -> dict:
+    """Process every file in ``folder`` (or only ``files``, if given); return a run summary.
 
     Unsupported files (anything but .docx/.png) are reported, not skipped
     silently. Hidden files (names starting with ".") are ignored.
@@ -83,7 +83,8 @@ def extract_folder(folder: Path, out_dir: Path, force: bool = False) -> dict:
     run: dict[str, str] = {}  # document id -> how this run handled it
     start = time.perf_counter()
 
-    for path in sorted(p for p in folder.iterdir() if p.is_file() and not p.name.startswith(".")):
+    candidates = files if files is not None else [p for p in folder.iterdir() if p.is_file()]
+    for path in sorted(p for p in candidates if not p.name.startswith(".")):
         doc_id = document_id(path)
         if path.suffix.lower() not in READERS:
             manifest[doc_id] = {"source": path.name, "status": "unsupported", "error": f"unsupported file type '{path.suffix}'"}

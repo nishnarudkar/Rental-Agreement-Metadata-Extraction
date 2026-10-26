@@ -195,10 +195,11 @@ def print_metrics(metrics: dict) -> None:
             print(f"{key}: {metrics[key]}")
     print(f"\n{'Field':<24}{'n':>3}{'raw':>8}{'norm':>8}  not extracted / blank ref / unattainable")
     for field, m in metrics["fields"].items():
-        fmt = lambda v: "  n/a" if v is None else f"{v:.2f}"
+        fmt = lambda v: "  n/a" if v is None else f"{v:.3f}"
         print(f"{field:<24}{m['denominator']:>3}{fmt(m['raw_recall']):>8}{fmt(m['normalized_recall']):>8}"
               f"  {m['not_extracted']} / {m['blank_reference']} / {m['unattainable_reference']}")
-    print(f"{'Macro average':<27}{metrics['macro_raw_recall'] or 0:>8.2f}{metrics['macro_normalized_recall'] or 0:>8.2f}")
+    # Three decimals: 0.625 is exactly representable and ".2f" would round it down to 0.62.
+    print(f"{'Macro average':<27}{metrics['macro_raw_recall'] or 0:>8.3f}{metrics['macro_normalized_recall'] or 0:>8.3f}")
 
 
 def main() -> None:
@@ -207,6 +208,7 @@ def main() -> None:
     parser.add_argument("--predictions", type=Path, help="predictions folder or CSV (default: outputs/predictions/<split>)")
     parser.add_argument("--documents", nargs="*", help="score only these document IDs")
     parser.add_argument("--exclude", nargs="*", default=[], help="label rows to exclude (reported in the output)")
+    parser.add_argument("--out", type=Path, help="report folder (default: outputs/evaluation/<split>)")
     parser.add_argument("--final", action="store_true", help="required for --split test")
     args = parser.parse_args()
     if args.split == "test" and not args.final:
@@ -226,7 +228,7 @@ def main() -> None:
                         if doc not in args.documents and doc not in exclude})
 
     result = evaluate(labels, predictions, exclude)
-    out_dir = EVALUATION_DIR / args.split
+    out_dir = args.out or EVALUATION_DIR / args.split
     result.save(out_dir)
     print_metrics(result.metrics)
     print(f"\nreports: {out_dir}/metrics.json, metrics.csv, per_document.csv")
