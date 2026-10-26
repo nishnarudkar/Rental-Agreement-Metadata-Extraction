@@ -25,6 +25,11 @@ pydantic>=2.0,<3.0
 # .env configuration (LLM_MODEL, LLM_NUM_CTX, OLLAMA_HOST)
 python-dotenv>=1.0,<2.0
 
+# REST API (optional part of the assignment): uvicorn src.api:app
+fastapi>=0.115,<1.0
+uvicorn>=0.30,<1.0
+python-multipart>=0.0.9,<1.0
+
 # Testing
 pytest>=8.0,<10.0
 
