@@ -25,15 +25,15 @@ NULL_NOTICE = {"value": None, "unit": None, "evidence": None}
 
 def _answer(**overrides) -> AgreementExtraction:
     data = {
-        "party_one": {"name": "Ms. Ananya Rao", "representative": None, "evidence": "between Ms. Ananya Rao (the Owner)"},
-        "party_two": {"name": "Mr. Kabir Mehta", "representative": None, "evidence": "Mr. Kabir Mehta (the Tenant)"},
+        "party_one": {"title": None, "name": "Ms. Ananya Rao", "relation": None, "representative": None, "evidence": "between Ms. Ananya Rao (the Owner)"},
+        "party_two": {"title": None, "name": "Mr. Kabir Mehta", "relation": None, "representative": None, "evidence": "Mr. Kabir Mehta (the Tenant)"},
         "monthly_rent": {"value": 18500, "evidence": "Monthly rent of Rs. 18,500/-"},
         "security_deposit": NULL_AMOUNT,
         "advance_rent": NULL_AMOUNT,
         "execution_date": {"value": "03.01.2024", "evidence": "made on 3rd January 2024"},
         "tenancy_start_date": {"value": "15.01.2024", "evidence": "commences on 15th January 2024"},
         "tenancy_end_date": {"value": "14.12.2024", "evidence": "ends on 14th December 2024"},
-        "term_months": None,
+        "term": {"months": None, "evidence": None},
         "termination_notice": {"value": 1, "unit": "months", "evidence": "giving one month's written notice"},
         "renewal_notice": NULL_NOTICE,
     }
