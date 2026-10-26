@@ -30,9 +30,9 @@ These were derived from the **training** documents and labels only (see `docs/da
 |---|---|---|
 | Agreement Value | `monthly_rent`, `security_deposit`, `advance_rent` (kept separate) | **`monthly_rent`**. Train labels are the monthly rent, never the deposit or advance. |
 | Start Date | `execution_date` and `tenancy_start_date` (kept separate) | **`tenancy_start_date`, otherwise `execution_date`**. In train, `47854715` was signed 21.03.2010 but the lease runs from 01.04.2010 (label 01.04.2010); `18325926` states only the execution date (label = that date). |
-| End Date | `tenancy_end_date`, `term_months` | `tenancy_end_date`, either stated or the last day of the stated term. |
+| End Date | `tenancy_end_date` (only if stated), `term` (months + evidence) | `tenancy_end_date` if stated; otherwise **computed in code** as the last day of the term: start + term months − 1 day (e.g. 01.04.2010 + 11 months → 28.02.2011). The model does no date arithmetic (changed in Prompt 10, config v3). |
 | Renewal Notice (Days) | `termination_notice` and `renewal_notice` (kept separate, each stored as value + unit) | **`termination_notice`, otherwise `renewal_notice`**, converted to days (1 month = 30, 1 week = 7). See the note below. |
-| Party One / Two | `party_one` / `party_two` with `name` and `representative` | `name`. Party One = lessor/owner, Party Two = lessee/tenant. |
+| Party One / Two | `party_one` / `party_two` with `title`, `name`, `relation`, `representative` | `name`. Party One = lessor/owner, Party Two = lessee/tenant. Titles (Mr., Prof.) and relations (S/o …) have their own slots so they stay out of `name` (Prompt 10, v3). |
 
 **Renewal vs termination notice.** The column is called "Renewal Notice", but the training
 labels follow the **termination/vacating** notice: `47854715` contains both
@@ -49,6 +49,9 @@ checked against labels.
 
 **Notice as value + unit.** The model reports the number and the unit as written
 (`2`, `months`). Converting to days happens in code, so the model does no arithmetic.
+
+*This document describes the frozen schema (config v3). Prompt 7's first version had a single
+`term_months` integer and no `title`/`relation` slots; see `docs/experiments.md` for why they changed.*
 
 ## 4. Validation (Pydantic)
 
