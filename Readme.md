@@ -250,6 +250,68 @@ Other entry points:
 | `python -m src.freeze` | confirm the frozen configuration is unchanged |
 | `jupyter lab notebooks/data_exploration.ipynb` | dataset audit |
 
+## REST API
+
+The same frozen pipeline is also available as a web service (`src/api.py`, FastAPI). Start it
+with Ollama running:
+
+```bash
+uvicorn src.api:app --host 127.0.0.1 --port 8000
+```
+
+Interactive documentation, where you can upload a file from the browser: http://127.0.0.1:8000/docs
+
+| Endpoint | Description |
+|---|---|
+| `GET /health` | Server status, whether the local model is reachable, model name, configuration |
+| `POST /extract` | Upload **one** agreement as multipart field `file` (`.docx` or `.png`, max 20 MB). Returns the six fields, an evidence quote per field, and any warnings |
+
+Example (PowerShell, using the curl that ships with Windows):
+
+```bash
+curl.exe -X POST http://127.0.0.1:8000/extract -F "file=@data/test/228094620-Rental-Agreement.pdf.docx"
+```
+
+Response (shortened):
+
+```json
+{
+  "document_id": "228094620-Rental-Agreement",
+  "document_type": "docx",
+  "status": "ok",
+  "prediction": {
+    "Aggrement Value": 15000,
+    "Aggrement Start Date": "07.07.2013",
+    "Aggrement End Date": "06.06.2014",
+    "Renewal Notice (Days)": 30,
+    "Party One": "KAPIL MEHROTRA",
+    "Party Two": "B.Kishore , S/o. Mr. B. Pampaiah"
+  },
+  "evidence": {
+    "Aggrement Value": {"value": 15000, "evidence": "Rs. 15,000.00 (Rupees Fifteen Thousand Only)", "evidence_found": true}
+  },
+  "warnings": [],
+  "error": null,
+  "ingestion_seconds": 0.01,
+  "extraction_seconds": 15.9,
+  "configuration": "v3"
+}
+```
+
+| HTTP status | When |
+|---|---|
+| 200 | Processed. `status` is `"ok"`, or `"failed"` with `error` and all fields `null` (nothing is invented) |
+| 413 | File larger than 20 MB |
+| 415 | Not a `.docx` or `.png` |
+| 422 | The file cannot be read (corrupt DOCX, not an image, empty file); `detail` says why |
+| 503 | The local model is not reachable (Ollama not running or model not pulled) |
+
+Notes:
+- The server binds to `127.0.0.1`, so it is reachable only from this computer.
+- Uploaded files are written to a temporary folder that is deleted after each request; nothing is stored.
+- Requests are processed one at a time, because the OCR engine and the GPU model are shared.
+- A DOCX takes about 15–55 s. A tall scanned PNG needs OCR first, which takes several minutes on CPU.
+
 Optional settings (environment variables or a `.env` file): `LLM_MODEL` (default
 `qwen2.5:7b`), `LLM_NUM_CTX` (default 16384), `OLLAMA_HOST` (default `http://localhost:11434`).
 Changing them changes the frozen configuration.
@@ -302,7 +364,8 @@ the original files left untouched:
 - **Labels**: label conventions (12- vs 11-month terms, impossible dates, spacing) limit exact
   match. With 13 labelled documents in total, all metrics have very wide uncertainty.
 - Single-column layouts are assumed; handwriting, stamps and rotated scans are not handled.
-- The optional REST API was **not built**.
+- The REST API processes one request at a time and has no authentication; it is meant for local
+  use, not for exposure on a network.
 
 ## Repository structure
 
@@ -321,6 +384,7 @@ the original files left untouched:
 │   ├── normalize.py           evaluation-only normalisation
 │   ├── evaluate.py            per-field recall, reports
 │   ├── predict.py             CLI: file or folder → predictions CSV
+│   ├── api.py                 REST API (FastAPI): /health, /extract
 │   ├── final_evaluation.py    one-shot frozen test evaluation
 │   ├── experiment.py          development experiments with log
 │   ├── freeze.py              frozen-configuration fingerprint
