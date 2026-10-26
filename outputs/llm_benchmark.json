@@ -1,0 +1,117 @@
+{
+  "model": "qwen2.5:7b",
+  "options": {
+    "temperature": 0.0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "num_predict": 1024
+  },
+  "gpu_used_before_mib": 163,
+  "json_test": {
+    "parsed": {
+      "owner": "Ms. Ananya Rao",
+      "tenant": "Mr. Kabir Mehta",
+      "monthly_rent": 18500,
+      "security_deposit": 100000,
+      "start_date": "15.01.2024",
+      "end_date": "14.12.2024",
+      "renewal_notice_days": 30
+    },
+    "identical_on_repeat": true,
+    "cold_seconds": 62.28,
+    "load_seconds": 33.92,
+    "warm_seconds": 2.22,
+    "prompt_tokens": 209,
+    "output_tokens": 98,
+    "output_tokens_per_second": 44.9
+  },
+  "by_context": [
+    {
+      "num_ctx": 4096,
+      "gpu_used_mib": 4844,
+      "total_mib": 4535,
+      "vram_mib": 4535,
+      "on_gpu_pct": 100,
+      "context_length": 4096,
+      "load_seconds": 5.24,
+      "output_tokens_per_second": 44.8
+    },
+    {
+      "num_ctx": 8192,
+      "gpu_used_mib": 5072,
+      "total_mib": 4763,
+      "vram_mib": 4763,
+      "on_gpu_pct": 100,
+      "context_length": 8192,
+      "load_seconds": 4.81,
+      "output_tokens_per_second": 44.6
+    },
+    {
+      "num_ctx": 16384,
+      "gpu_used_mib": 5528,
+      "total_mib": 5219,
+      "vram_mib": 5219,
+      "on_gpu_pct": 100,
+      "context_length": 16384,
+      "load_seconds": 4.82,
+      "output_tokens_per_second": 44.3
+    },
+    {
+      "num_ctx": 32768,
+      "gpu_used_mib": 6334,
+      "total_mib": 6525,
+      "vram_mib": 5966,
+      "on_gpu_pct": 91,
+      "context_length": 32768,
+      "load_seconds": 5.33,
+      "output_tokens_per_second": 40.1
+    }
+  ],
+  "train_document_tokens": {
+    "per_document": {
+      "6683129-House-Rental-Contract-Geraldine-Galinato-v2": {
+        "chars": 16898,
+        "tokens": 4783
+      },
+      "46239065-Standard-Rental-Agreement-Rental-With-Performance-Fee": {
+        "chars": 19792,
+        "tokens": 3945
+      },
+      "47854715-RENTAL-AGREEMENT": {
+        "chars": 4562,
+        "tokens": 1063
+      },
+      "54945838-Rental-Agreement": {
+        "chars": 3500,
+        "tokens": 989
+      },
+      "54770958-Rental-Agreement": {
+        "chars": 3420,
+        "tokens": 908
+      },
+      "6683127-House-Rental-Contract-GERALDINE-GALINATO-v2-Page-1": {
+        "chars": 3192,
+        "tokens": 835
+      },
+      "18325926-Rental-Agreement-1": {
+        "chars": 3269,
+        "tokens": 776
+      },
+      "50070534-RENTAL-AGREEMENT": {
+        "chars": 2683,
+        "tokens": 701
+      },
+      "36199312-Rental-Agreement": {
+        "chars": 2280,
+        "tokens": 648
+      },
+      "44737744-Maddireddy-Bhargava-Reddy-Rental-Agreement": {
+        "chars": 1117,
+        "tokens": 390
+      }
+    },
+    "longest": "6683129-House-Rental-Contract-Geraldine-Galinato-v2",
+    "longest_tokens": 4783,
+    "longest_tokens_at_default_4096": 2050
+  }
+}
