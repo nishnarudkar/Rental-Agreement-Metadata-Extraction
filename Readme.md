@@ -82,7 +82,20 @@ The evaluation was executed against the **4 test documents** using the cryptogra
 | **Party Two** | **0.00** (0/4) | **0.25** (1/4) | Known entity extraction challenge: model retains familial relations ("S/o ..."). |
 | **Macro Average** | **0.625** | **0.792** | **100% pipeline stability; zero fatal crashes; zero OCR-induced failures.** |
 
-*\* Normalized Recall strips cosmetic variances (case, whitespace, honorifics like "Mr.", currency symbols, date padding) without altering underlying entity semantics.*
+*\* Normalized Recall compares both sides after evaluation-only normalization ([`src/normalize.py`](src/normalize.py)); predictions and labels themselves are never changed. Amounts and day counts: surrounding whitespace, thousands separators and trailing `.00` are removed (`6,500.00` → `6500`); currency symbols are **not** removed. Dates: day and month zero-padded, `/` or `-` separators read as `.` (`1/4/2010` → `01.04.2010`); impossible dates are not corrected. Party names: case-insensitive, punctuation treated as spaces, `&` read as `and`, courtesy titles (Mr, Mrs, Ms, Miss, Dr, Prof, Sri, Shri, Smt, Kum, Mx) dropped; spelling and word order still matter. An empty prediction never matches.*
+
+### Raw Exact-Match Ceiling
+
+On this test set, raw exact match **cannot exceed 0.667**, however good the extraction is, because of how the reference labels are written:
+
+| Field | Highest attainable raw | Reason |
+|:---|:---:|:---|
+| **Party One** | 0/4 | All 4 reference names carry leading/trailing spaces: `'Hanumaiah '`, `' S.Sakunthala'`, `'V.K.NATARAJ '`, `' KAPIL MEHROTRA '` |
+| **Party Two** | 1/4 | 3 of 4 references are padded or start with a stray dot: `' Vishal Bhardwaj '`, `' VYSHNAVI DAIRY SPECIALITIES Private Ltd'`, `'.B.Kishore '`. Only `V.V.Ravi Kian` is clean |
+| **Aggrement End Date** | 3/4 | For `95980236`, the reference `31.03.2011` implies a 12-month term, but the document states "11 (Eleven) months" from 01.04.2010, i.e. 28.02.2011 |
+| **Value, Start Date, Notice** | 4/4 each | — |
+
+Ceiling = (1 + 1 + 0.75 + 1 + 0 + 0.25) / 6 = **0.667**. The system scores **0.625** of that 0.667. The only attainable cell it misses is `V.V.Ravi Kian`, where it kept the relation "S/o V.R.G.Sastry" in the name. This ceiling was computed after the single test run; the system was not changed.
 
 ### Full Test Set Predictions
 
